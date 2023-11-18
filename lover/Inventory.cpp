@@ -246,13 +246,16 @@ void Inventory::printInventory()
 }
 
 void Inventory::printTableFields(int length) {
-	int width = 15;
 	ConsoleHelper console;
 	console.printLine(length);
-	cout << setw(5) << "| №" << setw(40) << "| Название";
-	cout << setw(width) << "| Цена";
-	cout << setw(width) << "| Количество";
-	cout << setw(width) << "| Код" << "|" << endl;
+	cout << setw(5) << "| №" << setw(25) << "| Название";
+	cout << setw(15) << "| Марка";
+	cout << setw(15) << "| Модель";
+	cout << setw(12) << "| Цена";
+	cout << setw(44) << "| Количество на складе";
+	cout << setw(44) << "| Количество в магазине";
+	cout << setw(44) << "| Количество проданное";
+	cout << setw(10) << "| Код" << "|" << endl;
 	console.printLine(length);
 }
 

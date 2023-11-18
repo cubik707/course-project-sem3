@@ -78,12 +78,14 @@ void Product::print() const
 {
 	int width = 13; // Øטנטםא סעמכבצמג
 	cout.setf(ios::left | ios::fixed | ios::dec);
-	cout << "| " << setw(38) << name;
-	cout << "| " << setw(width) << price;
-	cout << "| " << setw(width) << soldQuantity;
-	cout << "| " << setw(width) << warehouseQuantity;
-	cout << "| " << setw(width) << shopQuantity;
-	cout << "| " << setw(width) << code << "|" << endl;
+	cout << "| " << setw(24) << name;
+	cout << "| " << setw(14) << brand;
+	cout << "| " << setw(14) << model;
+	cout << "| " << setw(11) << price;
+	cout << "| " << setw(43) << warehouseQuantity;
+	cout << "| " << setw(43) << shopQuantity;
+	cout << "| " << setw(43) << soldQuantity;
+	cout << "| " << setw(9) << code << "|" << endl;
 	cout.unsetf(ios::left | ios::fixed | ios::dec);
 }
 
