@@ -1,0 +1,15 @@
+Laptop|HP|Pavilion|800|10|5|5|001
+Desktop|Dell|Inspiron|1200|15|8|7|002
+Monitor|LG|UltraWide|400|20|10|10|003
+Printer|Epson|WorkForce|300|12|6|6|004
+Keyboard|Logitech|G Pro|100|25|15|10|005
+Mouse|SteelSeries|Rival 600|80|30|20|10|006
+Router|Netgear|Nighthawk|150|18|10|8|007
+Headphones|Sony|WH-1000XM4|300|15|8|7|008
+Tablet|Samsung|Galaxy Tab|500|10|5|5|009
+Camera|Canon|EOS Rebel|700|8|4|4|010
+Smartphone|Apple|iPhone 13|1000|12|6|6|011
+External HDD|Seagate|Backup Plus|120|20|12|8|012
+Graphics Card|NVIDIA|GeForce RTX 3080|700|5|2|3|013
+Speakers|Bose|SoundLink Mini|200|15|10|5|014
+External SSD|Samsung|T5|150|10|5|5|015

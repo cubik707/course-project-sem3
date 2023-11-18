@@ -58,62 +58,36 @@ void Admin::showMenu()
 			switch (activeMenu)
 			{
 			case 0:
-				//cout << "Эта часть еще не готова..." << endl;
-
-
-				//showAllUsers();
+				system("CLS");
+				SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+				Inventory::getInstance()->printInventory();
 				break;
 			case 1:
 				//cout << "Эта часть еще не готова..." << endl;
-
-
-
-
 				//addNewUser();
 				break;
 			case 2:
 				//cout << "Эта часть еще не готова..." << endl;
-
-
-
-
 				//changeUserData();
 				break;
 			case 3:
 				//cout << "Эта часть еще не готова..." << endl;
-
-
-
-
 				//deleteUser();
 				break;
 			case 4:
 				//cout << "Эта часть еще не готова..." << endl;
-
-
-
-
 				//searchUser();
 				break;
 			case 5:
 				//cout << "Эта часть еще не готова..." << endl;
-
-
-
-
 				//sortUsers();
 				break;
 			case 6:
 				//cout << "Эта часть еще не готова..." << endl;
-
-
-
 				//userControlMenu();
 				break;
 			case 7:
 				//cout << "Эта часть еще не готова..." << endl;
-
-
 				//showReport();
 				break;
 			case 8:

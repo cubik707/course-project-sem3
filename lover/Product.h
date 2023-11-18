@@ -8,6 +8,7 @@
 #include <atltime.h>
 
 using namespace std;
+#define FIELD_SEPARATOR '|'
 
 class Product
 {

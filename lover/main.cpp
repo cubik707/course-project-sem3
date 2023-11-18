@@ -13,6 +13,7 @@ int main() {
 	setlocale(LC_ALL, "Russian");
 
 	set_terminate(myTerminate);
+	Inventory::getInstance()->readFromFile();
 
 	UserManager manager;
 	//Admin user1("admin123", manager.genHashPassword("admin123", "12345"), "12345", LoginState::Admin);

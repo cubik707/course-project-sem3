@@ -129,8 +129,9 @@ void Product::setWarehouseQuantity(int warehouseQuantity) {
 
 ofstream& operator<<(ofstream& os, const Product& product)
 {
-	os << product.name << "|" << product.price << "|" << product.soldQuantity << "|" 
-	<< product.warehouseQuantity <<  "|" <<  product.shopQuantity << "|" << product.code << endl;
+	os << product.name << "|" << product.brand << "|" << product.model << "|" 
+		<< product.price << "|" << product.warehouseQuantity << "|" <<  product.shopQuantity 
+		<< "|" << product.soldQuantity << "|" << product.code << endl;
 	return os;
 }
 
@@ -138,15 +139,17 @@ ofstream& operator<<(ofstream& os, const Product& product)
 
 ifstream& operator>>(ifstream& is, Product& product)
 {
-	getline(is, product.name, '|');
+	getline(is, product.name, FIELD_SEPARATOR);
+	getline(is, product.brand, FIELD_SEPARATOR);
+	getline(is, product.model, FIELD_SEPARATOR);
 	is >> product.price;
-	is.ignore(1, '|');
-	is >> product.soldQuantity;
-	is.ignore(1, '|');
+	is.ignore(1, FIELD_SEPARATOR);
 	is >> product.warehouseQuantity;
-	is.ignore(1, '|');
+	is.ignore(1, FIELD_SEPARATOR);
 	is >> product.shopQuantity;
-	is.ignore(1, '|');
+	is.ignore(1, FIELD_SEPARATOR);
+	is >> product.soldQuantity;
+	is.ignore(1, FIELD_SEPARATOR);
 	getline(is, product.code, '\n');
 	return is;
 }

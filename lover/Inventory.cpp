@@ -27,8 +27,6 @@ std::vector<shared_ptr<Product>> Inventory::getProducts()
 void Inventory::readFromFile()
 {
 	ifstream file;
-	file.exceptions(std::fstream::failbit | std::fstream::badbit);
-
 	try
 	{
 		file.open("inventory.txt");
@@ -40,14 +38,7 @@ void Inventory::readFromFile()
 			fillVectorFromFile(file);
 		}
 
-
 		file.close();
-	}
-	catch (const std::ios_base::failure& e)
-	{
-		// ќбрабатываем ошибку, использу€ флаги статуса ошибок
-		std::cerr << "ќшибка ввода-вывода: " << e.what() << std::endl;
-		exit(0);
 	}
 	catch (const runtime_error& e)
 	{
@@ -68,6 +59,9 @@ void Inventory::fillVectorFromFile(ifstream& file)
 			// ƒобавл€ем считанный продукт в вектор
 			shared_ptr<Product> productPtr = make_shared<Product>(product);
 			products.push_back(productPtr);
+		}
+		else {
+			throw runtime_error("ќшибка при чтиении файла.");
 		}
 	}
 }
@@ -104,7 +98,7 @@ void Inventory::writeInFile()
 	}
 }
 
-bool Inventory::hasProduct(const string& productName)
+bool Inventory::hasProduct(const string& productName) // изменить посик по коду
 {
 	for (const auto& product : products) {
 		if (product->getName() == productName) {
@@ -153,19 +147,21 @@ shared_ptr<Product> Inventory::searchByCode(const string& productCode)
 
 void Inventory::sortByName()
 {
-	sort(products.begin(), products.end(), compareByName);
+	sort(products.begin(), products.end(), [](const shared_ptr<Product>& a, const shared_ptr<Product>& b) {
+		return a->getName() < b->getName();
+		});
 }
 
-void Inventory::sortByPrice()
-{
-	sort(products.begin(), products.end(), compareByPrice);
-}
-
-
-void Inventory::sortByCode()
-{
-	sort(products.begin(), products.end(), compareByCode);
-}
+//void Inventory::sortByPrice()
+//{
+//	sort(products.begin(), products.end(), compareByPrice);
+//}
+//
+//
+//void Inventory::sortByCode()
+//{
+//	sort(products.begin(), products.end(), compareByCode);
+//}
 
 
 void Inventory::addProduct(shared_ptr<Product> product)
@@ -185,51 +181,47 @@ void Inventory::removeProduct(shared_ptr<Product> product)
 
 void Inventory::editProduct(shared_ptr<Product> product) {
 
-	Validator<string> validString;
-	Validator<double> validDouble;
-	Validator<int> validInt;
-
-	string newName, newCode;
-	double newPrice;
-	int newSoldQuantity, newWarehouseQuantity, newShopQuantity;
+	//string newName, newCode;
+	//double newPrice;
+	//int newSoldQuantity, newWarehouseQuantity, newShopQuantity;
 
 
-	cout << "¬ведите новое название продукта: ";
-	newName = validString.getValidStr();
+	//cout << "¬ведите новое название продукта: ";
+	//newName = Validator<string>::getValidStr();
 
-	cout << "¬ведите новую цену: ";
-	newPrice = validDouble.getVar(0, INT_MAX);
+	//cout << "¬ведите новую цену: ";
+	//newPrice = Validator<double>::getVar(0, INT_MAX);
 
-	// Enter new sold quantity
-	cout << "¬ведите новое количество проданного товара: ";
-	newSoldQuantity = validInt.getVar(0, INT_MAX);
+	//// Enter new sold quantity
+	//cout << "¬ведите новое количество проданного товара: ";
+	//newSoldQuantity = Validator<int>::getVar(0, INT_MAX);
 
-	cout << "¬ведите новое количество товара на складе: ";
-	newWarehouseQuantity = validInt.getVar(0, INT_MAX);
+	//cout << "¬ведите новое количество товара на складе: ";
+	//newWarehouseQuantity = validInt.getVar(0, INT_MAX);
 
-	cout << "¬ведите новое количество товара в магазине: ";
-	newShopQuantity = validInt.getVar(0, INT_MAX);
+	//cout << "¬ведите новое количество товара в магазине: ";
+	//newShopQuantity = validInt.getVar(0, INT_MAX);
 
-	
+	//
 
 
 
-	do {
-		cout << "¬ведите новый код: ";
-		newCode = validString.getValidStr();
-	} while (hasProduct(newCode));
+	//do {
+	//	cout << "¬ведите новый код: ";
+	//	newCode = validString.getValidStr();
+	//} while (hasProduct(newCode));
 
 
 
-	product->setName(newName);
-	product->setPrice(newPrice);
-	product->setSoldQuantity(newSoldQuantity);
-	product->setWarehouseQuantity(newWarehouseQuantity);
-	product->setShopQuantity(newShopQuantity);
+	//product->setName(newName);
+	//product->setPrice(newPrice);
+	//product->setSoldQuantity(newSoldQuantity);
+	//product->setWarehouseQuantity(newWarehouseQuantity);
+	//product->setShopQuantity(newShopQuantity);
 
-	product->setCode(newCode);
+	//product->setCode(newCode);
 
-	return;
+	//return;
 }
 
 void Inventory::printInventory()
@@ -260,17 +252,12 @@ void Inventory::printTableFields(int length) {
 }
 
 
-bool compareByName(const shared_ptr<Product>& a, const shared_ptr<Product>& b)
-{
-	return a->getName() < b->getName();
-}
-
-bool compareByCode(const shared_ptr<Product>& a, const shared_ptr<Product>& b)
-{
-	return a->getCode() < b->getCode();
-}
-
-bool compareByPrice(const shared_ptr<Product>& a, const shared_ptr<Product>& b)
-{
-	return a->getPrice() < b->getPrice();
-}
+//bool compareByCode(const shared_ptr<Product>& a, const shared_ptr<Product>& b)
+//{
+//	return a->getCode() < b->getCode();
+//}
+//
+//bool compareByPrice(const shared_ptr<Product>& a, const shared_ptr<Product>& b)
+//{
+//	return a->getPrice() < b->getPrice();
+//}
