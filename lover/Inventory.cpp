@@ -228,7 +228,7 @@ void Inventory::printInventory()
 {
 	ConsoleHelper console;
 	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-	int length = 124, i = 1;
+	int length = 143, i = 1;
 	printTableFields(length);
 	for (auto& product : products) {
 		cout << left << setw(5) << "| " + to_string(i++);
@@ -236,16 +236,17 @@ void Inventory::printInventory()
 		console.printLine(length);
 	}
 	system("pause");
+	system("CLS");
 }
 
 void Inventory::printTableFields(int length) {
 	ConsoleHelper console;
-	int width = 15;
+	int width = 17;
 	console.printLine(length);
 	cout << left << setw(5) << "| №" << setw(width) << "| Название";
 	cout << setw(width) << "| Марка";
-	cout << setw(width) << "| Модель";
-	cout << setw(7) << "| Цена";
+	cout << setw(20) << "| Модель";
+	cout << setw(8) << "| Цена";
 	cout << setw(23) << "| Количество на складе";
 	cout << setw(24) << "| Количество в магазине";
 	cout << setw(23) << "| Количество проданное";
