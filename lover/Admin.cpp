@@ -59,7 +59,6 @@ void Admin::showMenu()
 			{
 			case 0:
 				system("CLS");
-				SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 				Inventory::getInstance()->printInventory();
 				break;
 			case 1:

@@ -6,6 +6,7 @@
 #include <sstream>
 #include <fstream>
 #include <atltime.h>
+#include "ConsoleHelper.h"
 
 using namespace std;
 #define FIELD_SEPARATOR '|'

@@ -226,28 +226,30 @@ void Inventory::editProduct(shared_ptr<Product> product) {
 
 void Inventory::printInventory()
 {
-	int length = 89, i = 1;
 	ConsoleHelper console;
-
+	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	int length = 124, i = 1;
 	printTableFields(length);
 	for (auto& product : products) {
 		cout << left << setw(5) << "| " + to_string(i++);
 		product->print();
 		console.printLine(length);
 	}
+	system("pause");
 }
 
 void Inventory::printTableFields(int length) {
 	ConsoleHelper console;
+	int width = 15;
 	console.printLine(length);
-	cout << setw(5) << "| №" << setw(25) << "| Название";
-	cout << setw(15) << "| Марка";
-	cout << setw(15) << "| Модель";
-	cout << setw(12) << "| Цена";
-	cout << setw(44) << "| Количество на складе";
-	cout << setw(44) << "| Количество в магазине";
-	cout << setw(44) << "| Количество проданное";
-	cout << setw(10) << "| Код" << "|" << endl;
+	cout << left << setw(5) << "| №" << setw(width) << "| Название";
+	cout << setw(width) << "| Марка";
+	cout << setw(width) << "| Модель";
+	cout << setw(7) << "| Цена";
+	cout << setw(23) << "| Количество на складе";
+	cout << setw(24) << "| Количество в магазине";
+	cout << setw(23) << "| Количество проданное";
+	cout << setw(7) << "| Код" << "|" << endl;
 	console.printLine(length);
 }
 

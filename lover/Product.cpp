@@ -76,16 +76,16 @@ void Product::setCode(const string& code)
 
 void Product::print() const
 {
-	int width = 13; // Øטנטםא סעמכבצמג
+	int width = 12; // Øטנטםא סעמכבצמג
 	cout.setf(ios::left | ios::fixed | ios::dec);
-	cout << "| " << setw(24) << name;
-	cout << "| " << setw(14) << brand;
-	cout << "| " << setw(14) << model;
-	cout << "| " << setw(11) << price;
-	cout << "| " << setw(43) << warehouseQuantity;
-	cout << "| " << setw(43) << shopQuantity;
-	cout << "| " << setw(43) << soldQuantity;
-	cout << "| " << setw(9) << code << "|" << endl;
+	cout << "| " << setw(width) << name;
+	cout << "| " << setw(width) << brand;
+	cout << "| " << setw(width) << model;
+	cout << "| " << setw(7) << price;
+	cout << "| " << setw(23) << warehouseQuantity;
+	cout << "| " << setw(24) << shopQuantity;
+	cout << "| " << setw(23) << soldQuantity;
+	cout << "| " << setw(7) << code << "|" << endl;
 	cout.unsetf(ios::left | ios::fixed | ios::dec);
 }
 

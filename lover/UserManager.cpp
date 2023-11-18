@@ -195,7 +195,7 @@ void UserManager::checkLogPass(LoginState state, const string& login, const stri
 			return;
 		}
 	}
-	system("pause > nul");
+	system("pause");
 }
 
 void UserManager::errorAutorisation()
@@ -203,7 +203,7 @@ void UserManager::errorAutorisation()
 	console.goToXY(51, 23);
 	cout << "\033[1;31mОшибка авторизации. Неверный логин или пароль\033[0m";
 	console.goToXY(54, 25);
-	system("pause > nul");
+	system("pause");
 	system("CLS");
 	return;
 }
