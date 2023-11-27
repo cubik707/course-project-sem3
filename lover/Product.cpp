@@ -1,12 +1,5 @@
 #include "Product.h"
 
-//Product::Product()
-//	: name("-"), price(0), quantity(0), code("-")
-//{
-//
-//}
-
-// default constructor
 Product::Product()
 	: name("-"), price(0), soldQuantity(0), warehouseQuantity(0), shopQuantity(0), code("-"), brand("-"), model("-")
 {
@@ -123,10 +116,6 @@ void Product::setWarehouseQuantity(int warehouseQuantity) {
 }
 
 
-
-
-
-
 ofstream& operator<<(ofstream& os, const Product& product)
 {
 	os << product.name << "|" << product.brand << "|" << product.model << "|" 
@@ -134,7 +123,6 @@ ofstream& operator<<(ofstream& os, const Product& product)
 		<< "|" << product.soldQuantity << "|" << product.code << endl;
 	return os;
 }
-
 
 
 ifstream& operator>>(ifstream& is, Product& product)

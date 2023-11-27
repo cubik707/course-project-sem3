@@ -42,10 +42,6 @@ public:
  	void setShopQuantity(int shopQuantity);
 	int getWarehouseQuantity() const;
 	void setWarehouseQuantity(int warehouseQuantity);
-
-
-
-
 	void print() const;
 
 	friend ofstream& operator<< (ofstream& out, const Product& product);

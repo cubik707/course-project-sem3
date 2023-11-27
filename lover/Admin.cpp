@@ -62,8 +62,7 @@ void Admin::showMenu()
 				Inventory::getInstance()->printInventory();
 				break;
 			case 1:
-				//cout << "Эта часть еще не готова..." << endl;
-				//addNewUser();
+				addProduct();
 				break;
 			case 2:
 				//cout << "Эта часть еще не готова..." << endl;
@@ -96,6 +95,47 @@ void Admin::showMenu()
 			break;
 		}
 	}
+}
+
+void Admin::addProduct()
+{
+	system("CLS");
+	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	Validator<string> validString;
+	Validator<double> validDouble;
+	Validator<int> validInt;
+
+	string name, brand, model, code;
+    double price;
+    int shopQuantity, warehouseQuantity, soldQuantity;
+
+    cout << "Введите название продукта: ";
+    name = validString.getValidStr();
+    cout << "Введите бренд продукта: ";
+    brand = validString.getValidStr();
+    cout << "Введите модель продукта: ";
+    model = validString.getValidStr();
+    cout << "Введите цену продукта: ";
+    price = validDouble.getVar(0, INT_MAX);
+    cout << "Введите количество продукта в магазине: ";
+    shopQuantity = validInt.getVar(0, INT_MAX);
+    cout << "Введите количество продукта на складе: ";
+    warehouseQuantity = validInt.getVar(0, INT_MAX);
+    cout << "Введите количество проданных продуктов: ";
+    soldQuantity = validInt.getVar(0, INT_MAX);
+    cout << "Введите код продукта: ";
+    code = validString.getValidStr();
+	while (code.length() != 3) {
+		cout << "Код должен содержать 3 символа!" << endl;
+		code = validString.getValidStr();
+	}
+	
+
+    shared_ptr<Product> product = make_shared<Product>(name, price, soldQuantity, warehouseQuantity, shopQuantity, code, brand, model);
+    Inventory* inventory = Inventory::getInstance();
+    inventory->addProduct(product);
+    cout << "Продукт успешно добавлен." << endl;
+	system("CLS");
 }
 
 // write showAllUsers() function
