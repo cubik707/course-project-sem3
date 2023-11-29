@@ -6,15 +6,12 @@
 class Admin :
     public User
 {
-private:
-    //string menu[9];
-
 public:
     Admin(const string& login, const string& hashPassword, const string& salt, LoginState state);
     void showMenu() override;
 
     void addProduct();
-    void removeProduct();
+    void deleteProduct();
     void editProduct();
     void showAllProducts();
     void showAllUsers();

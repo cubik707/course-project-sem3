@@ -113,11 +113,11 @@ shared_ptr<Product> Inventory::searchByName(const string& productName)
 {
 	Validator<string> valid;
 	string lowercaseName = productName;
-	valid.toLowercase(lowercaseName);
+	valid.convertRegister(lowercaseName);
 
 	for (const auto& product : products) {
 		string productLowercase = product->getName();
-		valid.toLowercase(productLowercase);
+		valid.convertRegister(productLowercase);
 
 		if (productLowercase == lowercaseName) {
 			return product;
@@ -131,10 +131,10 @@ shared_ptr<Product> Inventory::searchByCode(const string& productCode)
 {
 	Validator<string> valid;
 	string lowercaseCode = productCode;
-	valid.toLowercase(lowercaseCode);
+	valid.convertRegister(lowercaseCode);
 	for (const auto& product : products) {
 		string productLowercase = product->getCode();
-		valid.toLowercase(productLowercase);
+		valid.convertRegister(productLowercase);
 
 		if (productLowercase == lowercaseCode) {
 			return product;

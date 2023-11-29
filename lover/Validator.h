@@ -10,7 +10,7 @@ class Validator
 public:
 	static T getVar(T minLim, T maxLim);
 	static string getValidStr();
-	static void toLowercase(std::string& str);
+	static void convertRegister(std::string& str);
 };
 
 template<class T>
@@ -49,7 +49,6 @@ inline string Validator<T>::getValidStr() {
 
 	do {
 		try {
-			std::cin.ignore();
 			std::getline(std::cin, str);
 			if (std::cin.fail() || str.empty()) {
 				throw std::runtime_error("Ошибка ввода! Строка пуста!");
@@ -66,10 +65,13 @@ inline string Validator<T>::getValidStr() {
 }
 
 template<class T>
-inline void Validator<T>::toLowercase(std::string& str)
+inline void Validator<T>::convertRegister(std::string& str)
 {
-	for (auto& c : str) {
-		c = std::tolower(static_cast<unsigned char>(c));
+	if (!str.empty()) {
+		str[0] = toupper(str[0]);
+		for (int i = 1; i < str.length(); i++) {
+			str[i] = tolower(str[i]);
+		}
 	}
 }
 

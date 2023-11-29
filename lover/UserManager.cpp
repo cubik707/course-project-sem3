@@ -142,6 +142,7 @@ void UserManager::autorisation(LoginState state)
 			cout << "*";  // Отображаем введенный символ как звездочку
 		}
 	}
+	cin.ignore();
 	checkLogPass(state, login, password);
 }
 

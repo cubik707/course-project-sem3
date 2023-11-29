@@ -69,8 +69,7 @@ void Admin::showMenu()
 				//changeUserData();
 				break;
 			case 3:
-				//cout << "Эта часть еще не готова..." << endl;
-				//deleteUser();
+				deleteProduct();
 				break;
 			case 4:
 				//cout << "Эта часть еще не готова..." << endl;
@@ -100,6 +99,7 @@ void Admin::showMenu()
 void Admin::addProduct()
 {
 	system("CLS");
+	console.cursorVisible(true, 80);
 	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	Validator<string> validString;
 	Validator<double> validDouble;
@@ -108,13 +108,19 @@ void Admin::addProduct()
 	string name, brand, model, code;
     double price;
     int shopQuantity, warehouseQuantity, soldQuantity;
-
+	
     cout << "Введите название продукта: ";
     name = validString.getValidStr();
+	validString.convertRegister(name);
+
     cout << "Введите бренд продукта: ";
     brand = validString.getValidStr();
+	validString.convertRegister(brand);
+
     cout << "Введите модель продукта: ";
     model = validString.getValidStr();
+	validString.convertRegister(model);
+
     cout << "Введите цену продукта: ";
     price = validDouble.getVar(0, INT_MAX);
     cout << "Введите количество продукта в магазине: ";
@@ -123,6 +129,7 @@ void Admin::addProduct()
     warehouseQuantity = validInt.getVar(0, INT_MAX);
     cout << "Введите количество проданных продуктов: ";
     soldQuantity = validInt.getVar(0, INT_MAX);
+	cin.ignore();
     cout << "Введите код продукта: ";
     code = validString.getValidStr();
 	while (code.length() != 3) {
@@ -135,7 +142,35 @@ void Admin::addProduct()
     Inventory* inventory = Inventory::getInstance();
     inventory->addProduct(product);
     cout << "Продукт успешно добавлен." << endl;
+	system("pause");
 	system("CLS");
 }
 
-// write showAllUsers() function
+void Admin::deleteProduct()
+{
+	system("CLS");
+	console.cursorVisible(true, 80);
+	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	Validator<string> validString;
+	string code;
+	cout << "Введите код продукта: ";
+	code = validString.getValidStr();
+	while (code.length() != 3) {
+
+		cout << "Код должен содержать 3 символа!" << endl;
+		code = validString.getValidStr();
+	}
+	Inventory* inventory = Inventory::getInstance();
+	shared_ptr<Product> product = inventory->searchByCode(code);
+	if (product == nullptr) {
+		cout << "Продукт не найден" << endl;
+		system("pause");
+		system("CLS");
+		return;
+	}
+	inventory->removeProduct(product);
+	cout << "Продукт удален." << endl;
+	system("pause");
+	system("CLS");
+}
+
