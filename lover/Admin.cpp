@@ -137,11 +137,16 @@ void Admin::addProduct()
 		code = validString.getValidStr();
 	}
 	
-
-    shared_ptr<Product> product = make_shared<Product>(name, price, soldQuantity, warehouseQuantity, shopQuantity, code, brand, model);
-    Inventory* inventory = Inventory::getInstance();
-    inventory->addProduct(product);
-    cout << "Продукт успешно добавлен." << endl;
+	Inventory* inventory = Inventory::getInstance();
+	if (inventory->searchByCode(code) != nullptr) {
+		cout << "Продукт с кодом \"" << code << "\" уже существует. Невозможно добавить." << endl;
+	}
+	else {
+		shared_ptr<Product> product = make_shared<Product>(name, price, soldQuantity, warehouseQuantity, shopQuantity, code, brand, model);
+		inventory->addProduct(product);
+		cout << "Продукт успешно добавлен." << endl;
+	}
+    
 	system("pause");
 	system("CLS");
 }
