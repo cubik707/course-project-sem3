@@ -181,47 +181,7 @@ void Inventory::removeProduct(shared_ptr<Product> product)
 
 void Inventory::editProduct(shared_ptr<Product> product) {
 
-	//string newName, newCode;
-	//double newPrice;
-	//int newSoldQuantity, newWarehouseQuantity, newShopQuantity;
-
-
-	//cout << "¬ведите новое название продукта: ";
-	//newName = Validator<string>::getValidStr();
-
-	//cout << "¬ведите новую цену: ";
-	//newPrice = Validator<double>::getVar(0, INT_MAX);
-
-	//// Enter new sold quantity
-	//cout << "¬ведите новое количество проданного товара: ";
-	//newSoldQuantity = Validator<int>::getVar(0, INT_MAX);
-
-	//cout << "¬ведите новое количество товара на складе: ";
-	//newWarehouseQuantity = validInt.getVar(0, INT_MAX);
-
-	//cout << "¬ведите новое количество товара в магазине: ";
-	//newShopQuantity = validInt.getVar(0, INT_MAX);
-
-	//
-
-
-
-	//do {
-	//	cout << "¬ведите новый код: ";
-	//	newCode = validString.getValidStr();
-	//} while (hasProduct(newCode));
-
-
-
-	//product->setName(newName);
-	//product->setPrice(newPrice);
-	//product->setSoldQuantity(newSoldQuantity);
-	//product->setWarehouseQuantity(newWarehouseQuantity);
-	//product->setShopQuantity(newShopQuantity);
-
-	//product->setCode(newCode);
-
-	//return;
+	
 }
 
 void Inventory::printInventory()

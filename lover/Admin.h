@@ -13,13 +13,7 @@ public:
     void addProduct();
     void deleteProduct();
     void editProduct();
-    void showAllProducts();
-    void showAllUsers();
-    void changeUserData();
-    void deleteUser();
-    void sortUsers();
-    void searchUser();
-    void userControlMenu();
-    void showReport();
+    void editMenu(shared_ptr<Product> productToEdit);
+
 };
 
