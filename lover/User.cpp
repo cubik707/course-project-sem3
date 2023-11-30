@@ -93,13 +93,13 @@ void User::searchMenu()
 	system("CLS");
 	char ch;
 	int activeMenu = 0;
-	string line = "+---------------------------------+";
+	string line = "+-------------------------------------+";
 	string menu[] = {
-		"|  По названию продукта           |",
-		"|  По бренду продукта             |" ,
-		"|  По модели продукта             |",
-		"|  По коду продукта               |",
-		"|  Завершить редактирование       |" };
+		"|  По названию продукта               |",
+		"|  По бренду продукта                 |" ,
+		"|  По модели продукта                 |",
+		"|  По коду продукта                   |",
+		"|  Завершить редактирование           |" };
 	int size = sizeof(menu) / sizeof(string);
 	bool IsActive = true;
 	while (true) {
@@ -186,6 +186,7 @@ void User::searchForName()
 	}
 	else {
 		cout << "Найденные продукты с именем \"" << name << "\":" << endl;
+		inventory->printTableFields();
 		for (const auto& matchingProduct : matchingProducts) {
 			inventory->printProduct(matchingProduct);
 		}
@@ -197,10 +198,29 @@ void User::searchForBrand()
 	cout << "Введите производителя продукта:" << endl;
 	string brand = Validator<string>::getValidStr();
 	Validator<string>::convertRegister(brand);
-	shared_ptr<Product> product = Inventory::getInstance()->searchByBrand(brand);
-	if (product == nullptr) {
+
+	vector<shared_ptr<Product>> matchingProducts;
+	Inventory* inventory = Inventory::getInstance();
+
+	for (const auto& product : inventory->getProducts()) {
+		string productLowercase = product->getBrand();
+		Validator<string>::convertRegister(productLowercase);
+
+		if (productLowercase == brand) {
+			matchingProducts.push_back(product);
+		}
+	}
+
+	if (matchingProducts.empty()) {
 		cout << "Продукт с производителем \"" << brand << "\" не найден." << endl;
 		return;
+	}
+	else {
+		cout << "Найденные продукты с производителем \"" << brand << "\":" << endl;
+		inventory->printTableFields();
+		for (const auto& matchingProduct : matchingProducts) {
+			inventory->printProduct(matchingProduct);
+		}
 	}
 }
 
@@ -209,10 +229,29 @@ void User::searchForModel()
 	cout << "Введите модель продукта:" << endl;
 	string model = Validator<string>::getValidStr();
 	Validator<string>::convertRegister(model);
-	shared_ptr<Product> product = Inventory::getInstance()->searchByModel(model);
-	if (product == nullptr) {
+
+	vector<shared_ptr<Product>> matchingProducts;
+	Inventory* inventory = Inventory::getInstance();
+
+	for (const auto& product : inventory->getProducts()) {
+		string productLowercase = product->getModel();
+		Validator<string>::convertRegister(productLowercase);
+
+		if (productLowercase == model) {
+			matchingProducts.push_back(product);
+		}
+	}
+
+	if (matchingProducts.empty()) {
 		cout << "Продукт с моделью \"" << model << "\" не найден." << endl;
 		return;
+	}
+	else {
+		cout << "Найденные продукты с моделью \"" << model << "\":" << endl;
+		inventory->printTableFields();
+		for (const auto& matchingProduct : matchingProducts) {
+			inventory->printProduct(matchingProduct);
+		}
 	}
 
 }

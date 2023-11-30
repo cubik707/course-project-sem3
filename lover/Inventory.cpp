@@ -219,7 +219,7 @@ void Inventory::printInventory()
 	ConsoleHelper console;
 	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	int i = 1;
-	printTableFields(LINE_LENGTH);
+	printTableFields();
 	for (auto& product : products) {
 		cout << left << setw(5) << "| " + to_string(i++);
 		product->print();

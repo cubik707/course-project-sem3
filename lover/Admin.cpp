@@ -300,7 +300,7 @@ void Admin::editMenu(shared_ptr<Product> productToEdit)
 				return;
 			}
 			cout << "Редактирование успешно произведено!" << endl;
-			Inventory::getInstance()->printTableFields(60);
+			Inventory::getInstance()->printTableFields();
 			Inventory::getInstance()->printProduct(productToEdit);
 			system("pause");
 			system("CLS");
