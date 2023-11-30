@@ -14,6 +14,5 @@ public:
     void deleteProduct();
     void editProduct();
     void editMenu(shared_ptr<Product> productToEdit);
-
 };
 

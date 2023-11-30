@@ -23,14 +23,16 @@ protected:
     string salt;
     LoginState state;
 
-    string menu[7];
-    int size;
-    string line;
-
     ConsoleHelper console;
 public:
     User(const string& login, const string& hashPassword, const string& salt, LoginState state);
     virtual void showMenu();
+
+    void searchMenu();
+    void searchForName();
+    void searchForBrand();
+    void searchForModel();
+    void searchForCode();
 
     string genSalt();
 

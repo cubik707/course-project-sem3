@@ -144,6 +144,42 @@ shared_ptr<Product> Inventory::searchByCode(const string& productCode)
 	return nullptr;
 }
 
+shared_ptr<Product> Inventory::searchByBrand(const string& productBrand)
+{
+	Validator<string> valid;
+	string lowercaseBrand = productBrand;
+	valid.convertRegister(lowercaseBrand);
+
+	for (const auto& product : products) {
+		string productLowercase = product->getBrand();
+		valid.convertRegister(productLowercase);
+
+		if (productLowercase == lowercaseBrand) {
+			return product;
+		}
+	}
+
+	return nullptr;
+}
+
+shared_ptr<Product> Inventory::searchByModel(const string& productModel)
+{
+	Validator<string> valid;
+	string lowercaseModel = productModel;
+	valid.convertRegister(lowercaseModel);
+
+	for (const auto& product : products) {
+		string productLowercase = product->getModel();
+		valid.convertRegister(productLowercase);
+
+		if (productLowercase == lowercaseModel) {
+			return product;
+		}
+	}
+
+	return nullptr;
+}
+
 
 void Inventory::sortByName()
 {
@@ -197,6 +233,16 @@ void Inventory::printInventory()
 	}
 	system("pause");
 	system("CLS");
+}
+
+void Inventory::printProduct(shared_ptr<Product> product)
+{
+	ConsoleHelper console;
+	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	int length = 143, i = 1;
+	cout << left << setw(5) << "| " + to_string(i++);
+	product->print();
+	console.printLine(length);
 }
 
 void Inventory::printTableFields(int length) {

@@ -71,8 +71,7 @@ void Admin::showMenu()
 				deleteProduct();
 				break;
 			case 4:
-				//cout << "Эта часть еще не готова..." << endl;
-				//searchUser();
+				searchMenu();
 				break;
 			case 5:
 				//cout << "Эта часть еще не готова..." << endl;
@@ -253,6 +252,9 @@ void Admin::editMenu(shared_ptr<Product> productToEdit)
 				activeMenu++;
 			break;
 		case ENTER:
+			system("CLS");
+			console.cursorVisible(true, 80);
+			SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 			switch (activeMenu)
 			{
 			case 0:
@@ -295,11 +297,16 @@ void Admin::editMenu(shared_ptr<Product> productToEdit)
 				break;
 			case 7:
 				system("CLS");
-				break;
-				break;
+				return;
 			}
+			cout << "Редактирование успешно произведено!" << endl;
+			Inventory::getInstance()->printTableFields(60);
+			Inventory::getInstance()->printProduct(productToEdit);
+			system("pause");
+			system("CLS");
 		}
 
 	}
 }
+
 

@@ -5,7 +5,7 @@
 #include <iterator>
 #include <algorithm>
 
-
+#define LINE_LENGTH 60
 
 class Inventory
 {
@@ -29,6 +29,8 @@ public:
 
 	shared_ptr<Product> searchByName(const string& productName);
 	shared_ptr<Product> searchByCode(const string& productCode);
+	shared_ptr<Product> searchByBrand(const string& productBrand);
+	shared_ptr<Product> searchByModel(const string& productModel);
 	//shared_ptr<Product> searchByPrice(double productPrice);
 	//shared_ptr<Product> searchByQuantity(int productQuantity);
 
@@ -43,6 +45,7 @@ public:
 
 	void printTableFields(int length);
 	void printInventory();
+	void printProduct(shared_ptr<Product> product);
 };
 
 bool compareByCode(const shared_ptr<Product>& a, const shared_ptr<Product>& b);
