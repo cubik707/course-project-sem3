@@ -5,7 +5,7 @@
 #include <iterator>
 #include <algorithm>
 
-#define LINE_LENGTH 60
+#define LINE_LENGTH 143
 
 class Inventory
 {
@@ -41,14 +41,8 @@ public:
 
 	void addProduct(shared_ptr<Product> product);
 	void removeProduct(shared_ptr<Product> product);
-	void editProduct(shared_ptr<Product> product);
 
-	void printTableFields(int length);
+	void printTableFields();
 	void printInventory();
 	void printProduct(shared_ptr<Product> product);
 };
-
-bool compareByCode(const shared_ptr<Product>& a, const shared_ptr<Product>& b);
-bool compareByName(const shared_ptr<Product>& a, const shared_ptr<Product>& b);
-bool compareByPrice(const shared_ptr<Product>& a, const shared_ptr<Product>& b);
-//bool compareByQuantity(const shared_ptr<Product>& a, const shared_ptr<Product>& b);

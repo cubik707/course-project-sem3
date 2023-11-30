@@ -214,22 +214,16 @@ void Inventory::removeProduct(shared_ptr<Product> product)
 }
 
 
-
-void Inventory::editProduct(shared_ptr<Product> product) {
-
-	
-}
-
 void Inventory::printInventory()
 {
 	ConsoleHelper console;
 	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-	int length = 143, i = 1;
-	printTableFields(length);
+	int i = 1;
+	printTableFields(LINE_LENGTH);
 	for (auto& product : products) {
 		cout << left << setw(5) << "| " + to_string(i++);
 		product->print();
-		console.printLine(length);
+		console.printLine(LINE_LENGTH);
 	}
 	system("pause");
 	system("CLS");
@@ -239,34 +233,22 @@ void Inventory::printProduct(shared_ptr<Product> product)
 {
 	ConsoleHelper console;
 	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-	int length = 143, i = 1;
+	int i = 1;
 	cout << left << setw(5) << "| " + to_string(i++);
 	product->print();
-	console.printLine(length);
+	console.printLine(LINE_LENGTH);
 }
 
-void Inventory::printTableFields(int length) {
+void Inventory::printTableFields() {
 	ConsoleHelper console;
-	int width = 17;
-	console.printLine(length);
-	cout << left << setw(5) << "| №" << setw(width) << "| Название";
-	cout << setw(width) << "| Марка";
+	console.printLine(LINE_LENGTH);
+	cout << left << setw(5) << "| №" << setw(17) << "| Название";
+	cout << setw(17) << "| Марка";
 	cout << setw(20) << "| Модель";
 	cout << setw(8) << "| Цена";
 	cout << setw(23) << "| Количество на складе";
 	cout << setw(24) << "| Количество в магазине";
 	cout << setw(23) << "| Количество проданное";
 	cout << setw(7) << "| Код" << "|" << endl;
-	console.printLine(length);
+	console.printLine(LINE_LENGTH);
 }
-
-
-//bool compareByCode(const shared_ptr<Product>& a, const shared_ptr<Product>& b)
-//{
-//	return a->getCode() < b->getCode();
-//}
-//
-//bool compareByPrice(const shared_ptr<Product>& a, const shared_ptr<Product>& b)
-//{
-//	return a->getPrice() < b->getPrice();
-//}
