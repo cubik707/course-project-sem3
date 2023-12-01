@@ -74,7 +74,7 @@ void Admin::showMenu()
 				searchMenu();
 				break;
 			case 5:
-				
+				sortMenu();
 				break;
 			case 6:
 				

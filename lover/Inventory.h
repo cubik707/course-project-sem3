@@ -34,9 +34,11 @@ public:
 
 
 	void sortByName();
+	void sortByNameDescending();
 	void sortByPrice();
-	//void sortByQuantity();
+	void sortByPriceDescending();
 	void sortByCode();
+	void sortByCodeDescending();
 
 	void addProduct(shared_ptr<Product> product);
 	void removeProduct(shared_ptr<Product> product);

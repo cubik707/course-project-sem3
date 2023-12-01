@@ -59,7 +59,7 @@ void User::showMenu()
 				searchMenu();
 				break;
 			case 2:
-
+				sortMenu();
 				break;
 			case 3:
 
@@ -252,6 +252,92 @@ void User::searchForCode()
 	if (product == nullptr) {
 		cout << "Продукт с кодом \"" << code << "\" не найден." << endl;
 		return;
+	}
+}
+
+void User::sortMenu()
+{
+	system("CLS");
+	char ch;
+	int activeMenu = 0;
+	string line = "+-------------------------------------+";
+	string menu[] = {
+		"|  По названию продукта по возрастанию |",
+		"|  По названию продукта по убыванию    |",
+		"|  По цене по возрастанию              |",
+		"|  По цене по убыванию                 |",
+		"|  По коду продукта по возрастанию     |",
+		"|  По коду продукта по убыванию        |",
+		"|  Вернуться назад                     |" };
+	int size = sizeof(menu) / sizeof(string);
+	bool IsActive = true;
+	Inventory* inventory = Inventory::getInstance();
+	while (true) {
+		int x = 60, y = 10;
+		console.cursorVisible(false, 100);
+		SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+		console.goToXY(x, y);
+		cout << line;
+		console.goToXY(x, ++y);
+		cout << "|  По чему вы провести сортировку?  |";
+		console.goToXY(x, ++y);
+		cout << line;
+		console.goToXY(x, y + 10);
+		cout << line;
+		console.lightingMenu(activeMenu, menu, x, ++y, size);
+		ch = _getch();
+		string name, brand, model;
+
+		if (ch == -32) ch = _getch();
+
+		switch (ch)
+		{
+		case ESCAPE:
+			system("CLS");
+			return;
+		case UP:
+			if (activeMenu > 0)
+				activeMenu--;
+			break;
+		case DOWN:
+			if (activeMenu < size - 1)
+				activeMenu++;
+			break;
+		case ENTER:
+			system("CLS");
+			console.cursorVisible(true, 80);
+			SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+			switch (activeMenu)
+			{
+			case 0:
+				inventory->sortByName();
+				inventory->printInventory();
+				return;
+			case 1:
+				inventory->sortByNameDescending();
+				inventory->printInventory();
+				return;
+			case 2:
+				inventory->sortByPrice();
+				inventory->printInventory();
+				return;
+			case 3:
+				inventory->sortByPriceDescending();
+				inventory->printInventory();
+				return;
+			case 4:
+				inventory->sortByCode();
+				inventory->printInventory();
+				return;
+			case 5:
+				inventory->sortByCodeDescending();
+				inventory->printInventory();
+				return;
+			case 6:
+				system("CLS");
+				return;
+			}
+		}
 	}
 }
 

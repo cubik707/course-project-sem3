@@ -165,6 +165,7 @@ vector<shared_ptr<Product>> Inventory::searchByName(const string& productName)
 
 	return matchingProducts;
 }
+
 vector<shared_ptr<Product>> Inventory::searchByModel(const string& productModel)
 {
 	Validator<string> valid;
@@ -193,16 +194,40 @@ void Inventory::sortByName()
 		});
 }
 
-//void Inventory::sortByPrice()
-//{
-//	sort(products.begin(), products.end(), compareByPrice);
-//}
-//
-//
-//void Inventory::sortByCode()
-//{
-//	sort(products.begin(), products.end(), compareByCode);
-//}
+void Inventory::sortByNameDescending()
+{
+	sort(products.begin(), products.end(), [](const shared_ptr<Product>& a, const shared_ptr<Product>& b) {
+		return a->getName() > b->getName();  // Изменено условие сравнения
+		});
+}
+
+void Inventory::sortByPrice()
+{
+	sort(products.begin(), products.end(), [](const shared_ptr<Product>& a, const shared_ptr<Product>& b) {
+		return a->getPrice() < b->getPrice();
+		});
+}
+
+void Inventory::sortByPriceDescending()
+{
+	sort(products.begin(), products.end(), [](const shared_ptr<Product>& a, const shared_ptr<Product>& b) {
+		return a->getPrice() > b->getPrice();
+		});
+}
+
+void Inventory::sortByCode()
+{
+	sort(products.begin(), products.end(), [](const shared_ptr<Product>& a, const shared_ptr<Product>& b) {
+		return a->getCode() < b->getCode();
+		});
+}
+
+void Inventory::sortByCodeDescending()
+{
+	sort(products.begin(), products.end(), [](const shared_ptr<Product>& a, const shared_ptr<Product>& b) {
+		return a->getCode() > b->getCode();
+		});
+}
 
 
 void Inventory::addProduct(shared_ptr<Product> product)

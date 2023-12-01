@@ -34,6 +34,8 @@ public:
     void searchForModel();
     void searchForCode();
 
+    void sortMenu();
+
     string genSalt();
 
     string getLogin() { return login; }
