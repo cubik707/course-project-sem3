@@ -260,15 +260,15 @@ void User::sortMenu()
 	system("CLS");
 	char ch;
 	int activeMenu = 0;
-	string line = "+-------------------------------------+";
+	string line = "+---------------------------------------+";
 	string menu[] = {
-		"|  По названию продукта по возрастанию |",
-		"|  По названию продукта по убыванию    |",
-		"|  По цене по возрастанию              |",
-		"|  По цене по убыванию                 |",
-		"|  По коду продукта по возрастанию     |",
-		"|  По коду продукта по убыванию        |",
-		"|  Вернуться назад                     |" };
+		"|  По названию продукта по возрастанию  |",
+		"|  По названию продукта по убыванию     |",
+		"|  По цене по возрастанию               |",
+		"|  По цене по убыванию                  |",
+		"|  По коду продукта по возрастанию      |",
+		"|  По коду продукта по убыванию         |",
+		"|  Вернуться назад                      |" };
 	int size = sizeof(menu) / sizeof(string);
 	bool IsActive = true;
 	Inventory* inventory = Inventory::getInstance();
@@ -279,10 +279,10 @@ void User::sortMenu()
 		console.goToXY(x, y);
 		cout << line;
 		console.goToXY(x, ++y);
-		cout << "|  По чему вы провести сортировку?  |";
+		cout << "|      По чему провести сортировку?     |";
 		console.goToXY(x, ++y);
 		cout << line;
-		console.goToXY(x, y + 10);
+		console.goToXY(x, y + 8);
 		cout << line;
 		console.lightingMenu(activeMenu, menu, x, ++y, size);
 		ch = _getch();
