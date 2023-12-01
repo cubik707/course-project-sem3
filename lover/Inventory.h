@@ -31,7 +31,10 @@ public:
 	shared_ptr<Product> searchByCode(const string& productCode);
 	vector<shared_ptr<Product>> searchByBrand(const string& productBrand);
 	vector<shared_ptr<Product>> searchByModel(const string& productModel);
-
+	vector<shared_ptr<Product>> searchByPriceRange(double minPrice, double maxPrice);
+	vector<shared_ptr<Product>> searchByShopQuantity(int minQuantity, int maxQuantity);
+	vector<shared_ptr<Product>> searchByWarehouseQuantity(int minQuantity, int maxQuantity);
+	vector<shared_ptr<Product>> searchBySoldQuantity(int minQuantity, int maxQuantity);
 
 	void sortByName();
 	void sortByNameDescending();

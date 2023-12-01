@@ -36,6 +36,12 @@ public:
 
     void sortMenu();
 
+    void filterMenu();
+    void filterForPrice();
+    void filterForShopQ();
+    void filterForWarehouseQ();
+    void filterForSoldQ();
+
     string genSalt();
 
     string getLogin() { return login; }

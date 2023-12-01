@@ -62,24 +62,12 @@ void User::showMenu()
 				sortMenu();
 				break;
 			case 3:
-
+				filterMenu();
 				break;
 			case 4:
 
 				break;
 			case 5:
-				//cout << "Ёта часть еще не готова..." << endl;
-				//sortUsers();
-				break;
-			case 6:
-				//cout << "Ёта часть еще не готова..." << endl;
-				//userControlMenu();
-				break;
-			case 7:
-				//cout << "Ёта часть еще не готова..." << endl;
-				//showReport();
-				break;
-			case 8:
 				system("CLS");
 				break;
 			}
@@ -116,7 +104,6 @@ void User::searchMenu()
 		cout << line;
 		console.lightingMenu(activeMenu, menu, x, ++y, size);
 		ch = _getch();
-		string name, brand, model;
 		
 		if (ch == -32) ch = _getch();
 
@@ -286,7 +273,6 @@ void User::sortMenu()
 		cout << line;
 		console.lightingMenu(activeMenu, menu, x, ++y, size);
 		ch = _getch();
-		string name, brand, model;
 
 		if (ch == -32) ch = _getch();
 
@@ -337,6 +323,181 @@ void User::sortMenu()
 				system("CLS");
 				return;
 			}
+		}
+	}
+}
+
+void User::filterMenu()
+{
+	system("CLS");
+	char ch;
+	int activeMenu = 0;
+	string line = 
+		"+-----------------------------------+";
+	string menu[] = {
+		"|  ѕо цене                          |",
+		"|  ѕо кол-ву в магазине             |",
+		"|  ѕо кол-ву на складе              |",
+		"|  ѕо проданному кол-ву             |",
+		"|  ¬ернутьс€ назад                  |" };
+	int size = sizeof(menu) / sizeof(string);
+	bool IsActive = true;
+	Inventory* inventory = Inventory::getInstance();
+	while (true) {
+		int x = 60, y = 10;
+		console.cursorVisible(false, 100);
+		SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+		console.goToXY(x, y);
+		cout << line;
+		console.goToXY(x, ++y);
+		cout << 
+		"|    ѕо чему провести фильтрацию?   |";
+		console.goToXY(x, ++y);
+		cout << line;
+		console.goToXY(x, y + 6);
+		cout << line;
+		console.lightingMenu(activeMenu, menu, x, ++y, size);
+		ch = _getch();
+
+		if (ch == -32) ch = _getch();
+
+		switch (ch)
+		{
+		case ESCAPE:
+			system("CLS");
+			return;
+		case UP:
+			if (activeMenu > 0)
+				activeMenu--;
+			break;
+		case DOWN:
+			if (activeMenu < size - 1)
+				activeMenu++;
+			break;
+		case ENTER:
+			system("CLS");
+			console.cursorVisible(true, 80);
+			SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+			switch (activeMenu)
+			{
+			case 0:
+				filterForPrice();
+				break;
+			case 1:
+				filterForShopQ();
+				break;
+			case 2:
+				filterForWarehouseQ();
+				break;
+			case 3:
+				filterForSoldQ();
+				break;
+			case 4:
+				system("CLS");
+				return;
+			}
+			system("pause");
+			system("CLS");
+		}
+	}
+}
+
+void User::filterForPrice()
+{
+	cout << "¬ведите минимальную цену: ";
+	double minPrice = Validator<double>::getVar(0, INT_MAX-1);
+	cout << "¬ведите максимальную цену: ";
+	double maxPrice = Validator<double>::getVar(minPrice, INT_MAX);
+	Inventory* inventory = Inventory::getInstance();
+	vector<shared_ptr<Product>> matchingProducts = inventory->searchByPriceRange(minPrice, maxPrice);
+
+	if (matchingProducts.empty()) {
+		cout << "ѕродукт с указанной ценой не найден." << endl;
+		return;
+	}
+	else {
+		cout << "Ќайденные продукты с указанной ценой:" << endl;
+		inventory->printTableFields();
+		int i = 1;
+		for (const auto& matchingProduct : matchingProducts) {
+			cout << left << setw(5) << "| " + to_string(i++);
+			matchingProduct->print();
+			console.printLine(LINE_LENGTH);
+		}
+	}
+}
+
+void User::filterForShopQ()
+{
+	cout << "¬ведите минимальное количество: ";
+	int minQuantity = Validator<int>::getVar(0, INT_MAX - 1);
+	cout << "¬ведите максимальное количество: ";
+	int maxQuantity = Validator<int>::getVar(minQuantity, INT_MAX);
+	Inventory* inventory = Inventory::getInstance();
+	vector<shared_ptr<Product>> matchingProducts = inventory->searchByShopQuantity(minQuantity, maxQuantity);
+
+	if (matchingProducts.empty()) {
+		cout << "ѕродукт с указанным количеством в магазинен не найден." << endl;
+		return;
+	}
+	else {
+		cout << "Ќайденные продукты с указанным количеством в магазине:" << endl;
+		inventory->printTableFields();
+		int i = 1;
+		for (const auto& matchingProduct : matchingProducts) {
+			cout << left << setw(5) << "| " + to_string(i++);
+			matchingProduct->print();
+			console.printLine(LINE_LENGTH);
+		}
+	}
+}
+
+void User::filterForWarehouseQ()
+{
+	cout << "¬ведите минимальное количество на складе: ";
+	int minQuantity = Validator<int>::getVar(0, INT_MAX - 1);
+	cout << "¬ведите максимальное количество на складе: ";
+	int maxQuantity = Validator<int>::getVar(minQuantity, INT_MAX);
+	Inventory* inventory = Inventory::getInstance();
+	vector<shared_ptr<Product>> matchingProducts = inventory->searchByWarehouseQuantity(minQuantity, maxQuantity);
+
+	if (matchingProducts.empty()) {
+		cout << "ѕродукт с указанным количеством на складе не найден." << endl;
+		return;
+	}
+	else {
+		cout << "Ќайденные продукты с указанным количеством на складе:" << endl;
+		inventory->printTableFields();
+		int i = 1;
+		for (const auto& matchingProduct : matchingProducts) {
+			cout << left << setw(5) << "| " + to_string(i++);
+			matchingProduct->print();
+			console.printLine(LINE_LENGTH);
+		}
+	}
+}
+
+void User::filterForSoldQ()
+{
+	cout << "¬ведите минимальное проданное количество: ";
+	int minQuantity = Validator<int>::getVar(0, INT_MAX - 1);
+	cout << "¬ведите максимальное проданное количество: ";
+	int maxQuantity = Validator<int>::getVar(minQuantity, INT_MAX);
+	Inventory* inventory = Inventory::getInstance();
+	vector<shared_ptr<Product>> matchingProducts = inventory->searchBySoldQuantity(minQuantity, maxQuantity);
+
+	if (matchingProducts.empty()) {
+		cout << "ѕродукт с указанным проданным количеством не найден." << endl;
+		return;
+	}
+	else {
+		cout << "Ќайденные продукты с указанным проданным количеством:" << endl;
+		inventory->printTableFields();
+		int i = 1;
+		for (const auto& matchingProduct : matchingProducts) {
+			cout << left << setw(5) << "| " + to_string(i++);
+			matchingProduct->print();
+			console.printLine(LINE_LENGTH);
 		}
 	}
 }

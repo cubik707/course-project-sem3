@@ -186,6 +186,62 @@ vector<shared_ptr<Product>> Inventory::searchByModel(const string& productModel)
 	return matchingProducts;
 }
 
+vector<shared_ptr<Product>> Inventory::searchByPriceRange(double minPrice, double maxPrice)
+{
+	vector<shared_ptr<Product>> matchingProducts;
+
+	for (const auto& product : products) {
+		double productPrice = product->getPrice();
+		if (productPrice >= minPrice && productPrice <= maxPrice) {
+			matchingProducts.push_back(product);
+		}
+	}
+
+	return matchingProducts;
+}
+
+vector<shared_ptr<Product>> Inventory::searchByShopQuantity(int minQuantity, int maxQuantity)
+{
+	vector<shared_ptr<Product>> matchingProducts;
+
+	for (const auto& product : products) {
+		int shopQuantity = product->getShopQuantity();
+		if (shopQuantity >= minQuantity && shopQuantity <= maxQuantity) {
+			matchingProducts.push_back(product);
+		}
+	}
+
+	return matchingProducts;
+}
+
+vector<shared_ptr<Product>> Inventory::searchByWarehouseQuantity(int minQuantity, int maxQuantity)
+{
+	vector<shared_ptr<Product>> matchingProducts;
+
+	for (const auto& product : products) {
+		int warehouseQuantity = product->getWarehouseQuantity();
+		if (warehouseQuantity >= minQuantity && warehouseQuantity <= maxQuantity) {
+			matchingProducts.push_back(product);
+		}
+	}
+
+	return matchingProducts;
+}
+
+vector<shared_ptr<Product>> Inventory::searchBySoldQuantity(int minQuantity, int maxQuantity)
+{
+	vector<shared_ptr<Product>> matchingProducts;
+
+	for (const auto& product : products) {
+		int soldQuantity = product->getSoldQuantity();
+		if (soldQuantity >= minQuantity && soldQuantity <= maxQuantity) {
+			matchingProducts.push_back(product);
+		}
+	}
+
+	return matchingProducts;
+}
+
 
 void Inventory::sortByName()
 {

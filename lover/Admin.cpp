@@ -77,7 +77,7 @@ void Admin::showMenu()
 				sortMenu();
 				break;
 			case 6:
-				
+				filterMenu();
 				break;
 			case 7:
 				
@@ -298,7 +298,8 @@ void Admin::editMenu(shared_ptr<Product> productToEdit)
 			}
 			cout << "Редактирование успешно произведено!" << endl;
 			Inventory::getInstance()->printTableFields();
-			Inventory::getInstance()->printProduct(productToEdit);
+			cout << left << setw(5) << "| " + to_string(1);
+			productToEdit->print();
 			system("pause");
 			system("CLS");
 		}
