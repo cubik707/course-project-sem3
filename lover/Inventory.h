@@ -45,5 +45,4 @@ public:
 
 	void printTableFields();
 	void printInventory();
-	void printProduct(shared_ptr<Product> product);
 };

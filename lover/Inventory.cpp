@@ -259,15 +259,6 @@ void Inventory::printInventory()
 	system("CLS");
 }
 
-void Inventory::printProduct(shared_ptr<Product> product)
-{
-	ConsoleHelper console;
-	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-	int i = 1;
-	cout << left << setw(5) << "| " + to_string(i++);
-	product->print();
-	console.printLine(LINE_LENGTH);
-}
 
 void Inventory::printTableFields() {
 	ConsoleHelper console;
