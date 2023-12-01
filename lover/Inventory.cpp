@@ -109,22 +109,24 @@ bool Inventory::hasProduct(const string& productName) // изменить посик по коду
 }
 
 
-shared_ptr<Product> Inventory::searchByName(const string& productName)
+vector<shared_ptr<Product>> Inventory::searchByBrand(const string& productBrand)
 {
 	Validator<string> valid;
-	string lowercaseName = productName;
-	valid.convertRegister(lowercaseName);
+	string lowercaseBrand = productBrand;
+	valid.convertRegister(lowercaseBrand);
+
+	vector<shared_ptr<Product>> matchingProducts;
 
 	for (const auto& product : products) {
-		string productLowercase = product->getName();
+		string productLowercase = product->getBrand();
 		valid.convertRegister(productLowercase);
 
-		if (productLowercase == lowercaseName) {
-			return product;
+		if (productLowercase == lowercaseBrand) {
+			matchingProducts.push_back(product);
 		}
 	}
 
-	return nullptr;
+	return matchingProducts;
 }
 
 shared_ptr<Product> Inventory::searchByCode(const string& productCode)
@@ -144,40 +146,43 @@ shared_ptr<Product> Inventory::searchByCode(const string& productCode)
 	return nullptr;
 }
 
-shared_ptr<Product> Inventory::searchByBrand(const string& productBrand)
+vector<shared_ptr<Product>> Inventory::searchByName(const string& productName)
 {
 	Validator<string> valid;
-	string lowercaseBrand = productBrand;
-	valid.convertRegister(lowercaseBrand);
+	string lowercaseName = productName;
+	valid.convertRegister(lowercaseName);
+
+	vector<shared_ptr<Product>> matchingProducts;
 
 	for (const auto& product : products) {
-		string productLowercase = product->getBrand();
+		string productLowercase = product->getName();
 		valid.convertRegister(productLowercase);
 
-		if (productLowercase == lowercaseBrand) {
-			return product;
+		if (productLowercase == lowercaseName) {
+			matchingProducts.push_back(product);
 		}
 	}
 
-	return nullptr;
+	return matchingProducts;
 }
-
-shared_ptr<Product> Inventory::searchByModel(const string& productModel)
+vector<shared_ptr<Product>> Inventory::searchByModel(const string& productModel)
 {
 	Validator<string> valid;
 	string lowercaseModel = productModel;
 	valid.convertRegister(lowercaseModel);
+
+	vector<shared_ptr<Product>> matchingProducts;
 
 	for (const auto& product : products) {
 		string productLowercase = product->getModel();
 		valid.convertRegister(productLowercase);
 
 		if (productLowercase == lowercaseModel) {
-			return product;
+			matchingProducts.push_back(product);
 		}
 	}
 
-	return nullptr;
+	return matchingProducts;
 }
 
 

@@ -74,18 +74,15 @@ void Admin::showMenu()
 				searchMenu();
 				break;
 			case 5:
-				//cout << "Эта часть еще не готова..." << endl;
-				//sortUsers();
+				
 				break;
 			case 6:
-				//cout << "Эта часть еще не готова..." << endl;
-				//userControlMenu();
+				
 				break;
 			case 7:
-				//cout << "Эта часть еще не готова..." << endl;
-				//showReport();
+				
 				break;
-			case 8:
+			case 9:
 				system("CLS");
 				break;
 			}

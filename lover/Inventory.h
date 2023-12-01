@@ -27,12 +27,11 @@ public:
 
 	bool hasProduct(const string& productName);
 
-	shared_ptr<Product> searchByName(const string& productName);
+	vector<shared_ptr<Product>> searchByName(const string& productName);
 	shared_ptr<Product> searchByCode(const string& productCode);
-	shared_ptr<Product> searchByBrand(const string& productBrand);
-	shared_ptr<Product> searchByModel(const string& productModel);
-	//shared_ptr<Product> searchByPrice(double productPrice);
-	//shared_ptr<Product> searchByQuantity(int productQuantity);
+	vector<shared_ptr<Product>> searchByBrand(const string& productBrand);
+	vector<shared_ptr<Product>> searchByModel(const string& productModel);
+
 
 	void sortByName();
 	void sortByPrice();
