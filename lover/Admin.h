@@ -8,7 +8,7 @@ class UserManager;
 class Admin :
     public User
 {
-private:
+
 public:
     Admin(const string& login, const string& hashPassword, const string& salt, LoginState state);
     void showMenu() override;

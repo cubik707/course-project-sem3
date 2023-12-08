@@ -1,8 +1,24 @@
 #include "UserManager.h"
 
+UserManager* UserManager::instance = nullptr;
+
 UserManager::UserManager()
 {
 	readFromFile();
+}
+
+UserManager* UserManager::getInstance()
+{
+	if (instance == nullptr) {
+		instance = new UserManager();
+	}
+	return instance;
+}
+
+UserManager::~UserManager()
+{
+	delete instance;
+	instance = nullptr;
 }
 
 vector<shared_ptr<User>> UserManager::getUsers() const
@@ -207,28 +223,35 @@ void UserManager::errorAutorisation()
 void UserManager::printAccount()
 {
 	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-	int length = 49, i;
+	int length = 24;
+	cout.setf(ios::left);
 	console.printLine(length);
-	cout << left << setw(10) << "| №" <<
-		setw(20) << "| Логин" <<
-		setw(20) << "| Пароль" << "|" << endl;
+
+	cout << left << "|" << setw(23) << " Администраторы" << " |" << endl;
 	console.printLine(length);
-	cout << "|" << setw(length / 3) << " " << "Администраторы"
-		<< right << setw(static_cast<std::streamsize>(length / 3) + 4) << "|" << endl;
+	cout << left << setw(5) << "| №" <<
+		setw(20) << "| Логин" << "|" << endl;
 	console.printLine(length);
-	for (i = 0; i < admins.size(); i++) {
-		cout << left << setw(9) << "| " << i + 1 << "| "
-			<< setw(18) << admins[i]->getLogin() << "| " << setw(18) << "|" << endl;
+
+	for (int i = 0; i < admins.size(); i++) {
+		cout << setw(5) << "| " + to_string(i+1) << "| "
+			<< setw(18) << admins[i]->getLogin() << "|" << endl;
 		console.printLine(length);
 	}
-	cout << "|" << setw(length / 3) << " " << "Пользователи"
-		<< right << setw(static_cast<std::streamsize>(length / 3) + 6) << "|" << endl;
+
+	cout << endl;
 	console.printLine(length);
-	for (int j = 0; j < users.size(); j++) {
-		cout << left << setw(9) << "| " << j + i + 1 << "| "
-			<< setw(18) << users[j]->getLogin() << "| " << setw(18) << "|" << endl;
+	cout << left << "|" << setw(23) << " Пользователи" << " |" << endl;
+	console.printLine(length);
+	cout << left << setw(5) << "| №" <<
+		setw(20) << "| Логин" << "|" << endl;
+	console.printLine(length);
+	for (int i = 0; i < users.size(); i++) {
+		cout << setw(5) << "| " + to_string(i+1) << "| "
+			<< setw(18) << users[i]->getLogin() << "|" << endl;
 		console.printLine(length);
 	}
+	cout.unsetf(ios::left);
 	system("pause");
 	system("CLS");
 }

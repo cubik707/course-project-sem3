@@ -10,7 +10,6 @@ Admin::Admin(const string& login, const string& hashPassword, const string& salt
 
 void Admin::showMenu()
 {
-	UserManager md;
 	system("CLS");
 	char ch;
 	int activeMenu = 0;
@@ -82,7 +81,7 @@ void Admin::showMenu()
 				filterMenu();
 				break;
 			case 7:
-				
+				userMenu();
 				break;
 			case 8:
 
@@ -334,10 +333,10 @@ void Admin::userMenu()
 		console.goToXY(x, y);
 		cout << line;
 		console.goToXY(x, ++y);
-		cout << "|     Работа с учетными записями     |";
+		cout << "|   Работа с учетными записями    |";
 		console.goToXY(x, ++y);
 		cout << line;
-		console.goToXY(x, y + 9);
+		console.goToXY(x, y + 7);
 		cout << line;
 		console.lightingMenu(activeMenu, menu, x, ++y, size);
 		ch = _getch();
@@ -365,7 +364,7 @@ void Admin::userMenu()
 			switch (activeMenu)
 			{
 			case 0:
-
+				UserManager::getInstance()->printAccount();
 				break;
 			case 1:
 

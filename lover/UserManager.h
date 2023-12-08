@@ -12,12 +12,18 @@ class UserManager
 	: public Manager
 {
 private:
+	static UserManager* instance;
+	UserManager();
+
 	vector<shared_ptr<User>> users;
 	vector<shared_ptr<Admin>> admins;
 	vector<shared_ptr<User>> usersToVerify;
 	ConsoleHelper console;
 public:
-	UserManager();
+	static UserManager* getInstance();
+	UserManager(const UserManager&) = delete;
+	UserManager& operator=(const UserManager&) = delete;
+	~UserManager();
 
 	vector<shared_ptr<User>> getUsers() const;
 	vector<shared_ptr<Admin>> getAdmins() const;
