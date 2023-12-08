@@ -1,5 +1,10 @@
 #include "User.h"
 
+User::User()
+	: login("-"), hashPassword("-"), salt("-"), state(LoginState::User)
+{
+}
+
 User::User(const string& login, const string& hashPassword, const string& salt, LoginState state)
     : login(login), hashPassword(hashPassword), salt(salt), state(state)
 {

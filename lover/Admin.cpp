@@ -3,6 +3,14 @@
 
 
 
+Admin::Admin()
+{
+	login = "-";
+	hashPassword = "-";
+	salt = "-";
+	state = LoginState::Admin;
+}
+
 Admin::Admin(const string& login, const string& hashPassword, const string& salt, LoginState state)
 	: User(login, hashPassword, salt, state)
 {
@@ -340,9 +348,6 @@ void Admin::userMenu()
 		cout << line;
 		console.lightingMenu(activeMenu, menu, x, ++y, size);
 		ch = _getch();
-		string name, brand, model;
-		double price;
-		int shopQuantity, warehouseQuantity, soldQuantity;
 		if (ch == -32) ch = _getch();
 		switch (ch)
 		{
@@ -367,7 +372,7 @@ void Admin::userMenu()
 				UserManager::getInstance()->printAccount();
 				break;
 			case 1:
-
+				UserManager::getInstance()->addAccount();
 				break;
 			case 2:
 
@@ -379,12 +384,6 @@ void Admin::userMenu()
 
 				break;
 			case 5:
-
-				break;
-			case 6:
-
-				break;
-			case 7:
 				system("CLS");
 				return;
 			}

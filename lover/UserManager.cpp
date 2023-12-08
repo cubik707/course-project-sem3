@@ -256,6 +256,49 @@ void UserManager::printAccount()
 	system("CLS");
 }
 
+void UserManager::addAccount()
+{
+	system("CLS");
+	string login, password, salt;
+	cout << "Выберите, кого вы хотите добавить (1- админ/0 - пользователь)" << endl;
+	int choice = Validator<int>::getVar(0, 1);
+	cout << "Введите логин: " << endl;
+	login = Validator<string>::getValidStr();
+	cout << "Введите пароль: " << endl;
+	password = Validator<string>::getValidStr();
+	
+	switch (choice)
+	{
+	case 0: {
+		for (const auto& user : users)
+		{
+			if (user->getLogin() == login) {
+				cout << "Админ с таким логином уже сущетсвует!" << endl;
+			}
+		}
+		shared_ptr<User> user = make_shared<User>(login, genHashPassword(password, user->genSalt()),
+			user->genSalt(), LoginState::User);
+		users.push_back(user);
+	}
+		break;
+	case 1: {
+		for (const auto& admin : admins)
+		{
+			if (admin->getLogin() == login) {
+				cout << "Админ с таким логином уже сущетсвует!" << endl;
+			}
+		}
+		shared_ptr<Admin> admin = make_shared<Admin>(login, genHashPassword(password, admin->genSalt()), 
+			admin->genSalt(), LoginState::Admin);
+		admins.push_back(admin);
+	}
+		break;
+		cout << "Учетная запись успешно добавлена!" << endl;
+	}
+	system("pause");
+	system("CLS");
+}
+
 string UserManager::genHashPassword(string password, string salt)
 {
 	hash<string> toHash;

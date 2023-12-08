@@ -26,6 +26,7 @@ protected:
 
     ConsoleHelper console;
 public:
+    User();
     User(const string& login, const string& hashPassword, const string& salt, LoginState state);
     virtual void showMenu();
 

@@ -10,6 +10,7 @@ class Admin :
 {
 
 public:
+    Admin();
     Admin(const string& login, const string& hashPassword, const string& salt, LoginState state);
     void showMenu() override;
     
