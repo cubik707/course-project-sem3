@@ -259,7 +259,7 @@ void UserManager::printAccount()
 void UserManager::addAccount()
 {
 	system("CLS");
-	string login, password, salt;
+	string login, password;
 	cout << "Выберите, кого вы хотите добавить (1- админ/0 - пользователь)" << endl;
 	int choice = Validator<int>::getVar(0, 1);
 	cout << "Введите логин: " << endl;
@@ -331,6 +331,79 @@ void UserManager::deleteAccount(int choice, string login)
 		}
 	}
 	cout << "Учетная запись успешно удалена!" << endl;
+}
+
+void UserManager::editAccount()
+{
+	system("CLS");
+	string login, password;
+	cout << "Выберите, кого вы хотите редактировать (1- админ/0 - пользователь)" << endl;
+	int choice = Validator<int>::getVar(0, 1);
+	cout << "Введите логин: " << endl;
+	cin.ignore();
+	login = Validator<string>::getValidStr();
+	cout << "Введите новый пароль: " << endl;
+	password = Validator<string>::getValidStr();
+	switch (choice)
+	{
+	case 0: {
+		bool isFound = false;
+		for (const auto& user : users)
+		{
+			if (user->getLogin() == login) {
+				user->setHashPassword(genHashPassword(password, user->genSalt()));
+				isFound = true;
+			}
+		}
+		if (!isFound) {
+			cout << "Такой учетной записи не найдено!" << endl;
+		}
+	}
+		  break;
+	case 1: {
+		bool isFound = false;
+		for (const auto& admin : admins)
+		{
+			if (admin->getLogin() == login) {
+				admin->setHashPassword(genHashPassword(password, admin->genSalt()));
+				isFound = true;
+			}
+		}
+		if (!isFound) {
+			cout << "Такой учетной записи не найдено!" << endl;
+		}
+	}
+		  break;
+		  cout << "Учетная запись успешно изменена!" << endl;
+	}
+	system("pause");
+	system("CLS");
+}
+
+void UserManager::confirmAccount()
+{
+	system("CLS");
+	if (usersToVerify.empty()) {
+		cout << "Нет учетных записей для подтверждения." << endl;
+		system("pause");
+		system("CLS");
+		return;
+	}
+	int choice;
+	// Выводим список пользователей, которых нужно подтвердить
+	cout << "Список пользователей, ожидающих подтверждения:" << endl;
+	for (auto& userToVerify : usersToVerify) {
+		cout << "Логин: " << userToVerify->getLogin() << endl;
+		cout << "Хотите добаить этого пользователя? (1-да/0-нет)" << endl;
+		choice = Validator<int>::getVar(0, 1);
+		if (choice) {
+			users.push_back(userToVerify);
+		}
+	}
+	// Очищаем вектор пользователей, ожидающих подтверждения
+	usersToVerify.clear();
+	system("pause");
+	system("CLS");
 }
 
 string UserManager::genHashPassword(string password, string salt)

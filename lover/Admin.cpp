@@ -375,7 +375,7 @@ void Admin::userMenu()
 				UserManager::getInstance()->addAccount();
 				break;
 			case 2: {
-				
+				UserManager::getInstance()->editAccount();
 			}
 				break;
 			case 3: {
@@ -395,7 +395,7 @@ void Admin::userMenu()
 			}
 				break;
 			case 4:
-
+				UserManager::getInstance()->confirmAccount();
 				break;
 			case 5:
 				system("CLS");

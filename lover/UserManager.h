@@ -41,6 +41,8 @@ public:
 	void printAccount();
 	void addAccount();
 	void deleteAccount(int choice, string login);
+	void editAccount();
+	void confirmAccount();
 
 	string genHashPassword(string password, string salt);
 
