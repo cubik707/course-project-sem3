@@ -40,7 +40,7 @@ public:
 
 	void printAccount();
 	void addAccount();
-	void inputData(int choice);
+	void deleteAccount(int choice, string login);
 
 	string genHashPassword(string password, string salt);
 

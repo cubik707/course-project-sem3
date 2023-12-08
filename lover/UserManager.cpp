@@ -263,6 +263,7 @@ void UserManager::addAccount()
 	cout << "Выберите, кого вы хотите добавить (1- админ/0 - пользователь)" << endl;
 	int choice = Validator<int>::getVar(0, 1);
 	cout << "Введите логин: " << endl;
+	cin.ignore();
 	login = Validator<string>::getValidStr();
 	cout << "Введите пароль: " << endl;
 	password = Validator<string>::getValidStr();
@@ -297,6 +298,39 @@ void UserManager::addAccount()
 	}
 	system("pause");
 	system("CLS");
+}
+
+void UserManager::deleteAccount(int choice, string login)
+{
+	switch (choice)
+	{
+	case 0: {
+		auto it = find_if(users.begin(), users.end(), [login](const shared_ptr<User>& user) {
+			return user->getLogin() == login;
+			});
+
+		if (it != users.end()) {
+			users.erase(it);
+		}
+		else {
+			cout << "Такой учетной записи не найдено!" << endl;
+		}
+		break;
+	}
+		break;
+	case 1:
+		auto it = find_if(admins.begin(), admins.end(), [login](const shared_ptr<Admin>& admin) {
+			return admin->getLogin() == login;
+			});
+
+		if (it != admins.end()) {
+			admins.erase(it);
+		}
+		else {
+			cout << "Такой учетной записи не найдено!" << endl;
+		}
+	}
+	cout << "Учетная запись успешно удалена!" << endl;
 }
 
 string UserManager::genHashPassword(string password, string salt)

@@ -23,7 +23,7 @@ void Admin::showMenu()
 	int activeMenu = 0;
 	string line = "+---------------------------------+";
 	string menu[] = {
-		"|  Посмотреть список сотрудников  |",
+		"|  Посмотреть список товаров      |",
 		"|  Добавить товар                 |" ,
 		"|  Изменить данные о товаре       |",
 		"|  Удалить товар                  |",
@@ -374,11 +374,25 @@ void Admin::userMenu()
 			case 1:
 				UserManager::getInstance()->addAccount();
 				break;
-			case 2:
-
+			case 2: {
+				
+			}
 				break;
-			case 3:
-
+			case 3: {
+				cout << "Выберите, кого вы хотите удалить (1- админ/0 - пользователь)" << endl;
+				int choice = Validator<int>::getVar(0, 1);
+				cout << "Введите логин для удаления: " << endl;
+				cin.ignore();
+				string loginToDelete = Validator<string>::getValidStr();
+				if (loginToDelete != login) {
+					UserManager::getInstance()->deleteAccount(choice, loginToDelete);
+				}
+				else {
+					cout << "Вы не можете удалить сами себя!" << endl;
+				}
+				system("pause");
+				system("CLS");
+			}
 				break;
 			case 4:
 
