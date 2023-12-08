@@ -15,9 +15,6 @@ private:
 	vector<shared_ptr<User>> users;
 	vector<shared_ptr<Admin>> admins;
 	vector<shared_ptr<User>> usersToVerify;
-	string menu[4];
-	int size;
-	string line;
 	ConsoleHelper console;
 public:
 	UserManager();
@@ -34,6 +31,8 @@ public:
 	void checkLogPass(LoginState state, const string& login, const string& password);
 	void errorAutorisation();
 	void registration();
+
+	void printAccount();
 
 	string genHashPassword(string password, string salt);
 

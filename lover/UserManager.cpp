@@ -2,19 +2,7 @@
 
 UserManager::UserManager()
 {
-	line = "+-------------------------------------------------------+";
-	menu[0] = "| Администратор                                         |";
-	menu[1] = "| Пользователь                                          |";
-	menu[2] = "| Регистрация в качестве пользователя                   |";
-	menu[3] = "| Выход                                                 |";
-	size = sizeof(menu) / sizeof(string);
 	readFromFile();
-	//shared_ptr<Admin> user1 = make_shared<Admin>
-	//	("admin123", genHashPassword("admin123", "12345"), "12345", LoginState::Admin);
-	//shared_ptr<User> user2 = make_shared<User>
-	//	("user456", genHashPassword("user456", "67890"), "67890", LoginState::User);
-	//admins.push_back(user1);
-	//users.push_back(user2);
 }
 
 vector<shared_ptr<User>> UserManager::getUsers() const
@@ -35,9 +23,15 @@ vector<shared_ptr<User>> UserManager::getUsersToVerify() const
 void UserManager::showMenu()
 {
 	system("CLS");
+	string line = "+-------------------------------------------------------+";
+	string menu[] = {
+		"| Администратор                                         |",
+		"| Пользователь                                          |",
+		"| Регистрация в качестве пользователя                   |",
+		"| Выход                                                 |",
+	};
 	char ch;
-	int activeMenu = 0;
-	int x = 46, y = 14;
+	int activeMenu = 0, size = sizeof(menu) / sizeof(string), x = 46, y = 14;
 	while (true) {
 		console.cursorVisible(false, 100);
 		SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
@@ -209,6 +203,35 @@ void UserManager::errorAutorisation()
 	return;
 }
 
+
+void UserManager::printAccount()
+{
+	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	int length = 49, i;
+	console.printLine(length);
+	cout << left << setw(10) << "| №" <<
+		setw(20) << "| Логин" <<
+		setw(20) << "| Пароль" << "|" << endl;
+	console.printLine(length);
+	cout << "|" << setw(length / 3) << " " << "Администраторы"
+		<< right << setw(static_cast<std::streamsize>(length / 3) + 4) << "|" << endl;
+	console.printLine(length);
+	for (i = 0; i < admins.size(); i++) {
+		cout << left << setw(9) << "| " << i + 1 << "| "
+			<< setw(18) << admins[i]->getLogin() << "| " << setw(18) << "|" << endl;
+		console.printLine(length);
+	}
+	cout << "|" << setw(length / 3) << " " << "Пользователи"
+		<< right << setw(static_cast<std::streamsize>(length / 3) + 6) << "|" << endl;
+	console.printLine(length);
+	for (int j = 0; j < users.size(); j++) {
+		cout << left << setw(9) << "| " << j + i + 1 << "| "
+			<< setw(18) << users[j]->getLogin() << "| " << setw(18) << "|" << endl;
+		console.printLine(length);
+	}
+	system("pause");
+	system("CLS");
+}
 
 string UserManager::genHashPassword(string password, string salt)
 {

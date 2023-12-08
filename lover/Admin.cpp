@@ -1,4 +1,5 @@
 #include "Admin.h"
+#include "UserManager.h"
 
 
 
@@ -9,6 +10,7 @@ Admin::Admin(const string& login, const string& hashPassword, const string& salt
 
 void Admin::showMenu()
 {
+	UserManager md;
 	system("CLS");
 	char ch;
 	int activeMenu = 0;
@@ -81,6 +83,9 @@ void Admin::showMenu()
 				break;
 			case 7:
 				
+				break;
+			case 8:
+
 				break;
 			case 9:
 				system("CLS");
@@ -302,6 +307,88 @@ void Admin::editMenu(shared_ptr<Product> productToEdit)
 			productToEdit->print();
 			system("pause");
 			system("CLS");
+		}
+
+	}
+}
+
+void Admin::userMenu()
+{
+	system("CLS");
+	char ch;
+	int activeMenu = 0;
+	string line = "+---------------------------------+";
+	string menu[] = {
+		"|  Просмотр                       |",
+		"|  Добавление                     |" ,
+		"|  Редактирование                 |",
+		"|  Удаление                       |",
+		"|  Подтвердить учетную запись     |",
+		"|  Вернуться назад                |" };
+	int size = sizeof(menu) / sizeof(string);
+	bool IsActive = true;
+	while (true) {
+		int x = 60, y = 10;
+		console.cursorVisible(false, 100);
+		SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+		console.goToXY(x, y);
+		cout << line;
+		console.goToXY(x, ++y);
+		cout << "|     Работа с учетными записями     |";
+		console.goToXY(x, ++y);
+		cout << line;
+		console.goToXY(x, y + 9);
+		cout << line;
+		console.lightingMenu(activeMenu, menu, x, ++y, size);
+		ch = _getch();
+		string name, brand, model;
+		double price;
+		int shopQuantity, warehouseQuantity, soldQuantity;
+		if (ch == -32) ch = _getch();
+		switch (ch)
+		{
+		case ESCAPE:
+			system("CLS");
+			return;
+		case UP:
+			if (activeMenu > 0)
+				activeMenu--;
+			break;
+		case DOWN:
+			if (activeMenu < size - 1)
+				activeMenu++;
+			break;
+		case ENTER:
+			system("CLS");
+			console.cursorVisible(true, 80);
+			SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+			switch (activeMenu)
+			{
+			case 0:
+
+				break;
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+
+				break;
+			case 4:
+
+				break;
+			case 5:
+
+				break;
+			case 6:
+
+				break;
+			case 7:
+				system("CLS");
+				return;
+			}
 		}
 
 	}

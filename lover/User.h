@@ -6,6 +6,7 @@
 #include "Inventory.h"
 
 
+
 using namespace std;
 
 enum class LoginState { // Перечисление состояний авторизации

@@ -15,7 +15,7 @@ int main() {
 	set_terminate(myTerminate);
 	Inventory::getInstance()->readFromFile();
 
-	UserManager manager;
+	shared_ptr<UserManager> manager = make_shared<UserManager>();
 	//Admin user1("admin123", manager.genHashPassword("admin123", "12345"), "12345", LoginState::Admin);
 	//User user2("user456", manager.genHashPassword("user456", "67890"), "67890", LoginState::User);
 	//fstream file("users.txt");
@@ -23,8 +23,8 @@ int main() {
 	//file << user2.getState() << "|" << user2.getLogin() << "|" << user2.getHashPassword() << "|" << user2.getSalt() << endl;
 	//cout << "Файл запонен" << endl;
 
-	manager.welcomeMessage();
-	manager.showMenu();
+	manager->welcomeMessage();
+	manager->showMenu();
 
 	return 0;
 }
