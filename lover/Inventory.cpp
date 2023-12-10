@@ -103,6 +103,38 @@ void Inventory::writeInFile()
 	}
 }
 
+void Inventory::writeInFile(const string& filename)
+{
+	ofstream file;
+	file.exceptions(fstream::failbit | fstream::badbit);
+
+	try
+	{
+		file.open(filename, ios::out | ios::trunc); // Открываем файл для записи, существующий файл будет перезаписан
+
+		if (file.bad()) {
+			throw runtime_error("Ошибка в открытии файла для записи.");
+		}
+
+		for (const auto& product : products) {
+			file << *product; // Используем перегруженный оператор <<
+		}
+		cout << "Данные о товарах успешно сохранены в файле!" << endl;
+		file.close();
+	}
+	catch (const ios_base::failure& e)
+	{
+		// Обрабатываем ошибку, используя флаги статуса ошибок
+		cerr << "Ошибка ввода-вывода: " << e.what() << endl;
+		exit(0);
+	}
+	catch (const runtime_error& e)
+	{
+		cerr << e.what() << endl;
+		exit(0);
+	}
+}
+
 bool Inventory::hasProduct(const string& productName) // изменить посик по коду
 {
 	for (const auto& product : products) {

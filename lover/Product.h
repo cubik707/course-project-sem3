@@ -14,18 +14,20 @@ using namespace std;
 class Product
 {
 protected:
-	string name;
-	string brand;
-	string model;
-	double price;
-	int shopQuantity;
-	int warehouseQuantity;
-	int soldQuantity;
-	string code;
-public:
-	Product();
-	Product(const string& name, double price, int soldQuantity, int warehouseQuantity, int shopQuantity, const string& code, const string& brand, const string& model);
+	string name;               // Название продукта
+	string brand;              // Бренд продукта
+	string model;              // Модель продукта
+	double price;              // Цена продукта
+	int shopQuantity;          // Количество продукта в магазине
+	int warehouseQuantity;     // Количество продукта на складе
+	int soldQuantity;          // Количество проданных продуктов
+	string code;               // Код продукта
 
+public:
+	Product(); // Конструктор по умолчанию
+	Product(const string& name, double price, int soldQuantity, int warehouseQuantity, int shopQuantity, const string& code, const string& brand, const string& model); // Параметризированный конструктор
+
+	// Геттеры и сеттеры для полей класса
 	string getName() const;
 	void setName(const string& name);
 	double getPrice() const;
@@ -39,13 +41,14 @@ public:
 	int getSoldQuantity() const;
 	void setSoldQuantity(int soldQuantity);
 	int getShopQuantity() const;
- 	void setShopQuantity(int shopQuantity);
+	void setShopQuantity(int shopQuantity);
 	int getWarehouseQuantity() const;
 	void setWarehouseQuantity(int warehouseQuantity);
-	void print() const;
 
-	friend ofstream& operator<< (ofstream& out, const Product& product);
-	friend ifstream& operator>> (ifstream& is, Product& product);
+	void print() const; // Функция для вывода информации о продукте
+
+	friend ofstream& operator<< (ofstream& out, const Product& product); // Перегрузка оператора << для записи продукта в файл
+	friend ifstream& operator>> (ifstream& is, Product& product); // Перегрузка оператора >> для чтения продукта из файла
 };
 
 class ProductException : public std::exception {

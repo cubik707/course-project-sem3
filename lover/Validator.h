@@ -8,11 +8,13 @@ template <class T>
 class Validator
 {
 public:
+	// Получение от пользователя значения типа T в заданном диапазоне
 	static T getVar(T minLim, T maxLim);
+	// Получение от пользователя непустой строки
 	static string getValidStr();
+	// Преобразование первой буквы строки к верхнему регистру, а остальных к нижнему
 	static void convertRegister(std::string& str);
 };
-
 template<class T>
 inline T Validator<T>::getVar(T minLim, T maxLim)
 {

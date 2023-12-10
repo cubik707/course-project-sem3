@@ -1,5 +1,9 @@
 #include "UserManager.h"
 
+namespace MyNamespace {
+	int m;
+}
+
 int main() {
 
 	SetConsoleCP(1251);
@@ -12,5 +16,6 @@ int main() {
 	manager->showMenu();
 	manager->writeToFile("users.txt");
 	Inventory::getInstance()->writeInFile();
+	MyNamespace::m = 1;
 	return 0;
 }
