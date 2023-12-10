@@ -38,16 +38,6 @@ void Product::setPrice(double price)
 	this->price = price;
 }
 
-//int Product::getQuantity() const
-//{
-//	return this->quantity;
-//}
-
-//void Product::setQuantity(int quantity)
-//{
-//	this->quantity = quantity;
-//}
-
 string Product::getCode() const
 {
 	return this->code;
