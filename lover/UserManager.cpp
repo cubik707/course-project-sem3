@@ -233,6 +233,7 @@ void UserManager::registration()
 	cout << "################################";
 	console.goToXY(x, y + 6);
 	cout << "¬веите логин: ";
+
 	string login = Validator<string>::getValidStr();
 	cout << "¬ведите пароль: ";
 	string password = "";

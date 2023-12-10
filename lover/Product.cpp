@@ -17,15 +17,6 @@ Product::Product(const string& name, double price, int soldQuantity, int warehou
 }
 
 
-
-//Product::Product(const string& name, double price, int quantity, const string& code)
-//	:name(name), price(price), quantity(quantity), code(code)
-//{
-//	if (price < 0 || quantity < 0) {
-//		throw ProductException();
-//	}
-//}
-
 //getters and setters
 string Product::getName() const
 {
