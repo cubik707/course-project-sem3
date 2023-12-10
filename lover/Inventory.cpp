@@ -3,6 +3,10 @@
 
 Inventory* Inventory::instance = nullptr;
 
+Inventory::Inventory() {
+	readFromFile();
+}
+
 Inventory* Inventory::getInstance()
 {
 	if (!instance) {
@@ -17,6 +21,7 @@ Inventory::~Inventory()
 		delete instance;
 		instance = nullptr;
 	}
+	writeInFile();
 }
 
 std::vector<shared_ptr<Product>> Inventory::getProducts()
@@ -73,7 +78,7 @@ void Inventory::writeInFile()
 
 	try
 	{
-		file.open("inventor.txt", ios::out | ios::trunc); // Открываем файл для записи, существующий файл будет перезаписан
+		file.open("inventory_.txt", ios::out | ios::trunc); // Открываем файл для записи, существующий файл будет перезаписан
 
 		if (file.bad()) {
 			throw runtime_error("Ошибка в открытии файла для записи.");
@@ -82,7 +87,7 @@ void Inventory::writeInFile()
 		for (const auto& product : products) {
 			file << product; // Используем перегруженный оператор <<
 		}
-
+		cout << "Данные о товарах успешно сохранены в файле!" << endl;
 		file.close();
 	}
 	catch (const ios_base::failure& e)

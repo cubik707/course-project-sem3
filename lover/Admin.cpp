@@ -32,6 +32,7 @@ void Admin::showMenu()
 		"|  Фильтрация                     |",
 		"|  Работа с учетными записями     |",
 		"|  Вывести отчет                  |",
+		"|  Сохранить данные в файле       |",
 		"|  Выйти из аккаунта              |" };
 	int size = sizeof(menu) / sizeof(string);
 	bool IsActive = true;
@@ -45,7 +46,7 @@ void Admin::showMenu()
 		cout << "|       Меню администратора:      |";
 		console.goToXY(x, ++y);
 		cout << line;
-		console.goToXY(x, y + 11);
+		console.goToXY(x, y + 12);
 		cout << line;
 		console.lightingMenu(activeMenu, menu, x, ++y, size);
 		ch = _getch();
@@ -96,7 +97,15 @@ void Admin::showMenu()
 				break;
 			case 9:
 				system("CLS");
+				SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+				Inventory::getInstance()->writeInFile();
+				system("users_.txt");
+				system("pause");
+				system("CLS");
 				break;
+			case 10:
+				system("CLS");
+				return;
 			}
 			break;
 		}

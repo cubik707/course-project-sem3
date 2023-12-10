@@ -12,7 +12,7 @@ class Inventory
 private:
 	static Inventory* instance;
 	std::vector<shared_ptr<Product>> products;
-	Inventory() {};
+	Inventory();
 public:
 	static Inventory* getInstance();
 	Inventory(const Inventory&) = delete;

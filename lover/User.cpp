@@ -74,7 +74,7 @@ void User::showMenu()
 				break;
 			case 5:
 				system("CLS");
-				break;
+				return;
 			}
 			break;
 		}

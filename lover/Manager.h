@@ -17,6 +17,5 @@ public:
 	virtual void writeToFile(const string& filename) = 0;
 
 	void welcomeMessage(); //Функция, выводящая на консоль сообщение "Добро пожаловать!"
-	bool confirmAction(const string& str);
 };
 

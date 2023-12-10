@@ -4,7 +4,6 @@ UserManager* UserManager::instance = nullptr;
 
 UserManager::UserManager()
 {
-	readFromFile();
 }
 
 UserManager* UserManager::getInstance()
@@ -85,15 +84,11 @@ void UserManager::showMenu()
 				autorisation(LoginState::User);
 				break;
 			case 2:
-				/*registration();*/
-				cout << "Эта часть еще не готова..." << endl;
+				registration();
 				break;
 			case 3:
 				system("CLS");
-				if (confirmAction("выйти")) {
-					exit(0);
-				}
-				break;
+				return;
 			}
 			break;
 		}
@@ -152,6 +147,7 @@ void UserManager::autorisation(LoginState state)
 			cout << "*";  // Отображаем введенный символ как звездочку
 		}
 	}
+	writeToFile("users.txt");
 	cin.ignore();
 	checkLogPass(state, login, password);
 }
@@ -219,6 +215,50 @@ void UserManager::errorAutorisation()
 	return;
 }
 
+void UserManager::registration()
+{
+	console.cursorVisible(true, 80);
+	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	system("CLS");
+	int x = 0, y = 0;
+	console.goToXY(x, y);
+	cout << "################################";
+	console.goToXY(x, y + 1);
+	cout << "#                              #";
+	console.goToXY(x, y + 2);
+	cout << "#         РЕГИСТРАЦИЯ          #";
+	console.goToXY(x, y + 3);
+	cout << "#                              #";
+	console.goToXY(x, y + 4);
+	cout << "################################";
+	console.goToXY(x, y + 6);
+	cout << "Ввеите логин: ";
+	string login = Validator<string>::getValidStr();
+	cout << "Введите пароль: ";
+	string password = "";
+	char ch;
+	while ((ch = _getch()) != ENTER) {
+		if (ch == BACKSPACE) {
+			if (password.length() > 0) {
+				password.pop_back();
+				cout << "\b \b";  // Удаляем последний символ и сдвигаем курсор налево на 1 позицию
+			}
+		}
+		else {
+			password += ch;
+
+			cout << "*";  // Отображаем введенный символ как звездочку
+		}
+	}
+	User tempUser;
+	string salt =  tempUser.genSalt();
+	shared_ptr<User> regUser = make_shared<User>(login, genHashPassword(password, salt), salt, LoginState::UserToVerify);
+	usersToVerify.push_back(regUser);
+	cout << endl << "Вы успешно зарегестрировались! Ожидайте подтверждения о регистрации!" << endl;
+	system("pause");
+	system("CLS");
+}
+
 
 void UserManager::printAccount()
 {
@@ -277,8 +317,10 @@ void UserManager::addAccount()
 				cout << "Админ с таким логином уже сущетсвует!" << endl;
 			}
 		}
-		shared_ptr<User> user = make_shared<User>(login, genHashPassword(password, user->genSalt()),
-			user->genSalt(), LoginState::User);
+		User tempUser;
+		string salt = tempUser.genSalt();
+		shared_ptr<User> user = make_shared<User>(login, genHashPassword(password, salt),
+			salt, LoginState::User);
 		users.push_back(user);
 	}
 		break;
@@ -289,8 +331,10 @@ void UserManager::addAccount()
 				cout << "Админ с таким логином уже сущетсвует!" << endl;
 			}
 		}
-		shared_ptr<Admin> admin = make_shared<Admin>(login, genHashPassword(password, admin->genSalt()), 
-			admin->genSalt(), LoginState::Admin);
+		User tempUser;
+		string salt = tempUser.genSalt();
+		shared_ptr<Admin> admin = make_shared<Admin>(login, genHashPassword(password, salt),
+			salt, LoginState::Admin);
 		admins.push_back(admin);
 	}
 		break;
@@ -492,34 +536,29 @@ LoginState UserManager::stateToString(const string& stateStr)
 
 void UserManager::writeToFile(const string& filename)
 {
-	/*ofstream file;
+	ofstream file;
+
 	try {
-		file.open(filename);
+		file.open(filename, ios::out | ios::trunc);
 		if (file.bad()) {
 			throw runtime_error("Ошибка в открытии файла.");
 		}
 		else {
-			if (state == LoginState::Admin) {
-				for (auto& admin : admins) {
-					file << admin;
-				}
+			for (const auto& admin : admins) {
+				file << "Admin|" << admin->getLogin() << "|" << admin->getHashPassword() << "|" << admin->getSalt() << endl;
 			}
-			if (state == LoginState::User) {
-				for (auto& user : users) {
-					file << user;
-				}
+			for (auto& user : users) {
+				file << "User|" << user->getLogin() << "|" << user->getHashPassword() << "|" << user->getSalt() << endl;
 			}
-			if (state == LoginState::UserToVerify) {
-				for (auto& user : usersToVerify) {
-					file << user;
-				}
+			for (auto& user : usersToVerify) {
+				file << "UserToVerify|" << user->getLogin() << "|" << user->getHashPassword() << "|" << user->getSalt() << endl;
 			}
 		}
-		file.close();*/
-		/*}
+		file.close();
+		}
 		catch (const runtime_error& e)
 		{
 			cerr << e.what() << endl;
 			exit(0);
-		}*/
+		}
 }

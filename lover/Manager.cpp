@@ -32,14 +32,3 @@ void Manager::welcomeMessage()
 	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_INTENSITY);
 	system("pause");
 }
-
-bool Manager::confirmAction(const string& str)
-{
-	/*system("CLS");
-	int choice, x = 54, y = 16;
-	ConsoleHelper console;
-	console.cursorVisible(true, 80);
-	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-	*/
-	return true;
-}
