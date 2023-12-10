@@ -44,6 +44,8 @@ public:
     void filterForWarehouseQ();
     void filterForSoldQ();
 
+    void createReport();
+
     string genSalt();
 
     string getLogin() { return login; }

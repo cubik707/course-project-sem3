@@ -93,7 +93,7 @@ void Admin::showMenu()
 				userMenu();
 				break;
 			case 8:
-
+				createReport();
 				break;
 			case 9:
 				system("CLS");

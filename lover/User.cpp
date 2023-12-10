@@ -70,7 +70,7 @@ void User::showMenu()
 				filterMenu();
 				break;
 			case 4:
-
+				createReport();
 				break;
 			case 5:
 				system("CLS");
@@ -505,6 +505,37 @@ void User::filterForSoldQ()
 			console.printLine(LINE_LENGTH);
 		}
 	}
+}
+
+void User::createReport()
+{
+	system("CLS");
+	SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	ofstream excelFile("InventoryReport.csv");
+
+	if (!excelFile.is_open()) {
+		cout << "Ошибка открытия файла!" << endl;
+		return;
+	}
+
+	excelFile << "Наименование,Бренд,Модель,Цена,Количество в магазине,Количество на складе,Продано,Код" << endl;
+
+	for (const auto& product : Inventory::getInstance()->getProducts()) {
+		excelFile << product->getName() << ","
+			<< product->getBrand() << ","
+			<< product->getModel() << ","
+			<< product->getPrice() << ","
+			<< product->getShopQuantity() << ","
+			<< product->getWarehouseQuantity() << ","
+			<< product->getSoldQuantity() << ","
+			<< product->getCode() << endl;
+	}
+
+	excelFile.close();
+	cout << "Данные были успешно репотированы!" << endl;
+	system("InventoryReport.csv");
+	system("pause");
+	system("CLS");
 }
 
 string User::genSalt()
