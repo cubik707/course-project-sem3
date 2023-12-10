@@ -73,7 +73,7 @@ void Inventory::fillVectorFromFile(ifstream& file)
 
 void Inventory::writeInFile()
 {
-	fstream file;
+	ofstream file;
 	file.exceptions(fstream::failbit | fstream::badbit);
 
 	try
@@ -85,7 +85,7 @@ void Inventory::writeInFile()
 		}
 
 		for (const auto& product : products) {
-			file << product; // Используем перегруженный оператор <<
+			file << *product; // Используем перегруженный оператор <<
 		}
 		cout << "Данные о товарах успешно сохранены в файле!" << endl;
 		file.close();

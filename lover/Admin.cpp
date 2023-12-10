@@ -99,7 +99,7 @@ void Admin::showMenu()
 				system("CLS");
 				SetConsoleTextAttribute(console.getHStdOut(), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 				Inventory::getInstance()->writeInFile();
-				system("users_.txt");
+				system("inventory_.txt");
 				system("pause");
 				system("CLS");
 				break;
