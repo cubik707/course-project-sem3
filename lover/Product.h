@@ -50,10 +50,3 @@ public:
 	friend ofstream& operator<< (ofstream& out, const Product& product); // Перегрузка оператора << для записи продукта в файл
 	friend ifstream& operator>> (ifstream& is, Product& product); // Перегрузка оператора >> для чтения продукта из файла
 };
-
-class ProductException : public std::exception {
-public:
-	const char* what() const noexcept override {
-		return "Ошибка при создании продукта";
-	}
-};

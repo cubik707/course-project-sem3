@@ -11,9 +11,6 @@ Product::Product()
 Product::Product(const string& name, double price, int soldQuantity, int warehouseQuantity, int shopQuantity, const string& code, const string& brand, const string& model)
 	: name(name), price(price), soldQuantity(soldQuantity), warehouseQuantity(warehouseQuantity), shopQuantity(shopQuantity), code(code), brand(brand), model(model)
 {
-	if (price < 0 || soldQuantity < 0 || warehouseQuantity < 0 || shopQuantity < 0) {
-		throw ProductException();
-	}
 }
 
 
