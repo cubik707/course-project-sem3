@@ -147,21 +147,22 @@ void Admin::addProduct()
     soldQuantity = validInt.getVar(0, INT_MAX);
 	cin.ignore();
     cout << "Введите код продукта: ";
-    code = validString.getValidStr();
-	while (code.length() != 3) {
-		cout << "Код должен содержать 3 символа!" << endl;
-		code = validString.getValidStr();
-	}
-	
 	Inventory* inventory = Inventory::getInstance();
-	if (inventory->searchByCode(code) != nullptr) {
-		cout << "Продукт с кодом \"" << code << "\" уже существует. Невозможно добавить." << endl;
-	}
-	else {
-		shared_ptr<Product> product = make_shared<Product>(name, price, soldQuantity, warehouseQuantity, shopQuantity, code, brand, model);
-		inventory->addProduct(product);
-		cout << "Продукт успешно добавлен." << endl;
-	}
+	do {
+		code = validString.getValidStr();
+		while (code.length() != 3) {
+			cout << "Код должен содержать 3 символа!" << endl;
+			code = validString.getValidStr();
+		}
+		if (inventory->searchByCode(code) != nullptr) {
+			cout << "Продукт с кодом \"" << code << "\" уже существует. Невозможно добавить." << endl;
+			cout << "Введите новый код: ";
+		}
+	} while (inventory->searchByCode(code) != nullptr);
+
+	shared_ptr<Product> product = make_shared<Product>(name, price, soldQuantity, warehouseQuantity, shopQuantity, code, brand, model);
+	inventory->addProduct(product);
+	cout << "Продукт успешно добавлен." << endl;
     
 	system("pause");
 	system("CLS");
